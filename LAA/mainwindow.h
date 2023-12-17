@@ -9,6 +9,9 @@
 #include <QUrlQuery>
 #include <QMessageBox>
 #include <QScrollBar>
+#include "qsqldatabase.h"
+#include <QtSql>
+#include <QSqlDatabase>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -34,5 +37,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     std::vector<QPushButton*> buttonsThread;
+    QSqlDatabase db_connection;
 };
 #endif // MAINWINDOW_H

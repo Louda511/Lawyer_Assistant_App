@@ -2,11 +2,58 @@
 #include "qtextbrowser.h"
 #include "ui_mainwindow.h"
 // thread_k6SV1GuiIIRXojo6cM5Wi7pF
+int count=0;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    db_connection = QSqlDatabase::addDatabase("QSQLITE");
+    db_connection.setDatabaseName(QCoreApplication::applicationDirPath()+"/Local.db");
+
+    db_connection.open();
+    QSqlDatabase::database().transaction();
+    QSqlQuery querycount(db_connection);
+
+    querycount.prepare("select * from Thread");
+
+    querycount.exec();
+    QSqlDatabase::database().commit();
+
+    while(querycount.next())
+    {
+        count++;
+    }
+    db_connection.close();
+
+    while(count)
+    {
+        db_connection.open();
+        QSqlDatabase::database().transaction();
+        QSqlQuery queryview(db_connection);
+
+        QString stringValue = QString::number(count);
+        queryview.prepare("select Request from (select Request,min(ID) from Chat where Thread_id='"+stringValue+"')");
+
+        queryview.exec();
+        QSqlDatabase::database().commit();
+
+        QString threadName;
+        while(queryview.next())
+        {
+            threadName= queryview.value(0).toString();
+        }
+
+
+
+        QPushButton *button = new QPushButton(threadName);
+        buttonsThread.push_back(button);
+        // connect(button, &QPushButton::clicked, this, &MainWindow::onButtonClickedThread);
+        ui->scrollAreaThreadsWidgetContents1->addWidget(button);
+        count--;
+    }
+
+    db_connection.close();
 }
 
 MainWindow::~MainWindow()
