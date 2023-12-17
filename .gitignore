@@ -9,6 +9,7 @@ lerna-debug.log*
 build-LAA-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+LAA.pro.usr
 
 # Runtime data
 pids
