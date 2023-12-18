@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "qpushbutton.h"
+#include "chat.h"
 #include <QMainWindow>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -25,6 +26,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    QString curThreadId=NULL;
+    QString newThreadId=NULL;
 
 private slots:
     void on_pushButtonNewChat_clicked();
