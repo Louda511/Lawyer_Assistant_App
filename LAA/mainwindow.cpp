@@ -33,8 +33,9 @@ MainWindow::MainWindow(QWidget *parent)
         QSqlQuery queryview(db_connection);
 
         QString stringValue = QString::number(count);
-        queryview.prepare("select substr(Request,1, 20) from (select Request from (select Request,min(ID) from Chat where Thread_id='"+stringValue+"'));");
 
+        queryview.prepare("select substr(Request,1, 20) from (select Request from (select Request,min(ID) from Chat where Thread_id='"+stringValue+"'));");
+        
         queryview.exec();
         QSqlDatabase::database().commit();
 
@@ -107,7 +108,7 @@ void MainWindow::onGetNetworkReply(QNetworkReply *reply) {
 
 void MainWindow::on_pushButtonSendReq_clicked()
 {
-    QString threadId ="thread_k6SV1GuiIIRXojo6cM5Wi7pF";
+    curThreadId ="thread_k6SV1GuiIIRXojo6cM5Wi7pF";
     // Get the content of the QTextEdit
     QString content = ui->textEditMsg->toPlainText();  // Assuming textEditMsg is a member variable in your class
 
@@ -123,7 +124,7 @@ void MainWindow::on_pushButtonSendReq_clicked()
     // Create a QUrlQuery and add your content as a parameter
     QUrlQuery postData;
     postData.addQueryItem("msg", content);
-    postData.addQueryItem("threadId", threadId);
+    postData.addQueryItem("threadId", curThreadId);
 
     // Convert the QUrlQuery to QByteArray
     QByteArray postDataByteArray = postData.toString(QUrl::FullyEncoded).toUtf8();
@@ -145,22 +146,38 @@ void MainWindow::onNetworkReply(QNetworkReply *reply) {
         // Read the server's response
         QByteArray responseData = reply->readAll();
         QString responseString = QString::fromUtf8(responseData);
-
+        QString requestString = ui->textEditMsg->toPlainText();
         // Create a new text browser to display the response
         QTextBrowser *responseTextBrowser = new QTextBrowser(this);
         responseTextBrowser->setPlainText(responseString);
 
+        // Create a new text browser to display the request
         QTextBrowser *reqTextBrowser = new QTextBrowser(this);
-        reqTextBrowser->setPlainText( ui->textEditMsg->toPlainText());
-        // Add the new text browser to the layout
+        reqTextBrowser->setPlainText(requestString);
+
+        // Set the size policy to Expanding for both text browsers
+        responseTextBrowser->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        reqTextBrowser->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        // Adjust the size of the text browsers to fit their content
+        responseTextBrowser->adjustSize();
+        reqTextBrowser->adjustSize();
+        // Add the new text browsers to the layout
         ui->scrollAreaChatsLayout->addWidget(reqTextBrowser);
         ui->scrollAreaChatsLayout->addWidget(responseTextBrowser);
 
+
+
         // Scroll to the bottom to show the latest response
         ui->scrollAreaChats->verticalScrollBar()->setValue(ui->scrollAreaChats->verticalScrollBar()->maximum());
-        qDebug()<< ui->scrollAreaChats->verticalScrollBar()->value();
+
         // Clear the content of the QTextEdit
         ui->textEditMsg->clear();
+        db_connection = QSqlDatabase::addDatabase("QSQLITE");
+        db_connection.setDatabaseName(QCoreApplication::applicationDirPath()+"/Local.db");
+
+        db_connection.open();
+        Chat newChat(requestString,responseString,curThreadId,db_connection);
+        db_connection.close();
     }
 
     // Clean up the reply object
