@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         QString stringValue = QString::number(count);
 
-        queryview.prepare("select substr(Request,1, 20) from (select Request from (select Request,min(ID) from Chat where Thread_id='"+stringValue+"'));");
+        queryview.prepare("select substr(Request,1, 20) from (select Request from (select Request,min(ID) from Chats where Thread_id='"+stringValue+"'));");
         
         queryview.exec();
         QSqlDatabase::database().commit();
