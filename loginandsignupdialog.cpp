@@ -1,5 +1,6 @@
 #include "loginandsignupdialog.h"
 #include "ui_loginandsignupdialog.h"
+#include "authenticationpageapi.h"
 
 
 loginAndSignUpDialog::loginAndSignUpDialog(QWidget *parent)
@@ -36,7 +37,7 @@ void loginAndSignUpDialog::on_loginButton_clicked()
 {
     if(ui->stackedWidget->currentIndex() == 0)
     {
-        //performLogin(ui->emailLineEditLogIn->text(),ui->passwordLineEditLogIn->text());
+        authenticationPageApi::performLogin(ui->emailLineEditLogIn->text(),ui->passwordLineEditLogIn->text());
     }
     else
     {
