@@ -58,11 +58,20 @@ void loginAndSignUpDialog::on_signUpButton_clicked()
 
     if(ui->stackedWidget->currentIndex() == 1)
     {
+        QString name = "Mohamed Magdy";
+        QString email = "john@example.com";
+        QString password = "123456";
+        QString jobTitle = "lawyer";
+        QString type = "lawyer";
+        QString supEmail = "john@example.com";
+
+        authenticationPageApi::performSignUp(name,email,password,jobTitle,type,supEmail);
 
     }
     else
     {
         ui->stackedWidget->setCurrentIndex(1);
+
         /*
         ui->stackedWidget->resize(250,440);
         resize(300,500);
