@@ -16,6 +16,7 @@ SOURCES += \
     \  # todocomponent.cpp # This line is added by qmake for the generated moc file
     todo.cpp \
     todocomponent.cpp \
+    todosboardwindow.cpp \
     user.cpp
 
 HEADERS += \
@@ -23,6 +24,7 @@ HEADERS += \
     loginandsignupdialog.h \
     todo.h \
     todocomponent.h \
+    todosboardwindow.h \
     user.h
 
 FORMS += \

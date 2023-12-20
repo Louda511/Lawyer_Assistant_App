@@ -69,7 +69,7 @@ void loginAndSignUpDialog::on_signUpButton_clicked()
         if(ui->comboBox->currentIndex() == 0)
             supEmail = ui->supervisorLineEdit->text();
         else
-            supEmail = "";
+            supEmail = email;
 
         // Debugging output
         qDebug() << "Name:" << name;

@@ -5,13 +5,15 @@
 toDoComponent::toDoComponent(QWidget *parent) : QWidget(parent) {
 
     // Get user type (lawyer or supervisor)
-    userType = user::getInstance()->getType();
+     userType = user::getInstance()->getType();
 
     // Create the components
     checkbox = new QCheckBox("To Do", this);  // Set the text during creation
+    checkbox->setEnabled(true);
     description = new QTextBrowser(this);
     deadLine = new QLabel("Deadline:", this);
     lawyerOrSupervisorLabel = new QLabel(this);
+
 
     // Create layouts
     QHBoxLayout *hLayout = new QHBoxLayout();
@@ -40,13 +42,12 @@ toDoComponent::toDoComponent(QWidget *parent) : QWidget(parent) {
 
     // Set the main layout for the widget
     setLayout(mainLayout);
-    performDeleteToDo();
 }
 
 bool toDoComponent::performDeleteToDo()
 {
     deleteLater();
-    return 1;
+    return true;
 }
 void toDoComponent::setTextBrowserDescription(QString text) {
     description->setText(text);
