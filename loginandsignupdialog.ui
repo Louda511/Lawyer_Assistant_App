@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>301</width>
-    <height>602</height>
+    <height>622</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -23,9 +23,9 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>20</y>
+     <y>0</y>
      <width>241</width>
-     <height>501</height>
+     <height>571</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -139,7 +139,7 @@
        <x>10</x>
        <y>30</y>
        <width>225</width>
-       <height>461</height>
+       <height>528</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -275,6 +275,51 @@
            </size>
           </property>
           <property name="maximumSize">
+           <size>
+            <width>221</width>
+            <height>31</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="jobTitleVLayout">
+        <item>
+         <widget class="QLabel" name="jobTitleLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>130</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>130</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Job Title</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="jobTitleLineEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
            <size>
             <width>221</width>
             <height>31</height>
@@ -464,7 +509,7 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>520</y>
+     <y>570</y>
      <width>196</width>
      <height>31</height>
     </rect>

@@ -58,15 +58,19 @@ void loginAndSignUpDialog::on_signUpButton_clicked()
 
     if(ui->stackedWidget->currentIndex() == 1)
     {
-        QString name = "Mohamed Magdy";
-        QString email = "john@example.com";
-        QString password = "123456";
-        QString jobTitle = "lawyer";
-        QString type = "lawyer";
-        QString supEmail = "john@example.com";
+        QString name = ui->firstNameLineEdit->text()+" "+ui->lastNameLineEdit->text();
+        QString email = ui->emailTextEditSignUp->text();
+        QString password = ui->passwordLineEditSignUp->text();
+        QString jobTitle = ui->jobTitleLineEdit->text();
+        QString type = ui->comboBox->currentText();
+        QString supEmail;
+
+        if(ui->comboBox->currentIndex() == 0)
+            supEmail = ui->emailTextEditSignUp->text();
+        else
+            supEmail = NULL;
 
         authenticationPageApi::performSignUp(name,email,password,jobTitle,type,supEmail);
-
     }
     else
     {

@@ -10,12 +10,17 @@
 #include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QList>
+#include "user.h"
+#include "toDo.h"
 
 
 class authenticationPageApi : public QObject {
     Q_OBJECT
 
 public:
+
+
     // Static function to perform a login POST request
     static void performLogin(const QString &email, const QString &password);
 
@@ -23,6 +28,8 @@ public:
     static void performSignUp(const QString &name, const QString &email,
                               const QString &password, const QString &jobTitle,
                               const QString &type, const QString &supEmail);
+
+
 
 
 private slots:
