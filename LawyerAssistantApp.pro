@@ -13,15 +13,15 @@ SOURCES += \
     authenticationpageapi.cpp \
     main.cpp \
     loginandsignupdialog.cpp \
-    toDo.cpp \
     \  # todocomponent.cpp # This line is added by qmake for the generated moc file
+    todo.cpp \
     todocomponent.cpp \
     user.cpp
 
 HEADERS += \
     authenticationpageapi.h \
     loginandsignupdialog.h \
-    toDo.h \
+    todo.h \
     todocomponent.h \
     user.h
 
