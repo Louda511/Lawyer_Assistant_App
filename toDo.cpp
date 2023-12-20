@@ -5,6 +5,12 @@ toDo::toDo() {
     // Initialize member variables if needed
 }
 
+toDo::toDo(int newId, const QString& newTitle, const QString& newDescription, const QString& newDeadline, int newLawyerId)
+    : id(newId), title(newTitle), description(newDescription), deadline(newDeadline), l_id(newLawyerId)
+{
+    // Additional initialization if needed
+}
+
 // Setters
 void toDo::setId(int newId) {
     id = newId;

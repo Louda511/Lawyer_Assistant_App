@@ -71,6 +71,13 @@ void loginAndSignUpDialog::on_signUpButton_clicked()
         else
             supEmail = "";
 
+        // Debugging output
+        qDebug() << "Name:" << name;
+        qDebug() << "Email:" << email;
+        qDebug() << "Password:" << password;
+        qDebug() << "Job Title:" << jobTitle;
+        qDebug() << "Type:" << type;
+        qDebug() << "Supervisor Email:" << supEmail;
 
         authenticationPageApi::performSignUp(name,email,password,jobTitle,type,supEmail);
     }

@@ -15,6 +15,7 @@ private:
 public:
     // Constructors
     toDo();
+    toDo(int newId, const QString& newTitle, const QString& newDescription, const QString& newDeadline, int newLawyerId);
 
     // Setters
     void setId(int newId);

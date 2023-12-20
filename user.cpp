@@ -74,3 +74,12 @@ const QString& user::getEmail() const {
 int user::getSupervisorId() const {
     return sup_id;
 }
+
+// Function implementation of todos QList
+
+const QList<toDo>& user::getToDos() const {
+    return todos;
+}
+void user::appendToDo(const toDo& newToDo) {
+    todos.append(newToDo);
+}
