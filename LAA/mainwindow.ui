@@ -26,6 +26,8 @@
          <widget class="QPushButton" name="pushButtonNewChat">
           <property name="font">
            <font>
+            <family>Ink Free</family>
+            <pointsize>12</pointsize>
             <bold>true</bold>
            </font>
           </property>
@@ -39,6 +41,12 @@
         </item>
         <item>
          <widget class="QLabel" name="label">
+          <property name="font">
+           <font>
+            <family>Georgia</family>
+            <pointsize>16</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Your Chats</string>
           </property>
@@ -54,8 +62,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>256</width>
-             <height>445</height>
+             <width>297</width>
+             <height>413</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -80,8 +88,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>612</width>
-             <height>380</height>
+             <width>571</width>
+             <height>366</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -109,6 +117,7 @@
          <widget class="QPushButton" name="pushButtonDeleteConversation">
           <property name="font">
            <font>
+            <family>Bell MT</family>
             <bold>true</bold>
            </font>
           </property>
@@ -131,6 +140,11 @@
             <height>50</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Arial Black</family>
+           </font>
+          </property>
          </widget>
         </item>
        </layout>
@@ -145,7 +159,7 @@
      <x>0</x>
      <y>0</y>
      <width>903</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuLOG_OUT">
