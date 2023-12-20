@@ -3,6 +3,7 @@
 // Constructors
 user::user() {
     // Initialize member variables if needed
+
 }
 // Initialize the static member
 user* user::instance = nullptr;

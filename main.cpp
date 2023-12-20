@@ -1,14 +1,13 @@
 #include "loginandsignupdialog.h"
 #include "todocomponent.h"
-
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //loginAndSignUpDialog w;
-    //w.show();
-
+    loginAndSignUpDialog w;
+    w.show();
+    /*
     QMainWindow mainWindow;
 
     // Create a toDoComponent
@@ -19,6 +18,7 @@ int main(int argc, char *argv[])
 
     // Show the main window
     mainWindow.show();
-
+    todoComponent->performDeleteToDo();
+    */
     return a.exec();
 }

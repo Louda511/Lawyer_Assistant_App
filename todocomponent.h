@@ -17,16 +17,20 @@ class toDoComponent : public QWidget {
     Q_OBJECT
 public:
     toDoComponent(QWidget *parent = nullptr);
+    bool performDeleteToDo();
+    void setTextBrowserDescription(QString text);
+    void setDeadLineLabel(QString deadline);
+    void setLawyerOrSupervisorLabel(QString label);
+
+
 
 private:
     QCheckBox *checkbox;
     QTextBrowser *description;
     QLabel *deadLine;
-    QLabel *supervisor;
-    QLabel *lawyer;
-    QPushButton deleteToDo;
-
-
+    QLabel *lawyerOrSupervisorLabel;
+    QPushButton *deleteButton;
+    QString userType;
 };
 
 #endif // TODOCOMPONENT_H

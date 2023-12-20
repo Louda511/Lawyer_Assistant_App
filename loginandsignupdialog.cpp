@@ -69,8 +69,7 @@ void loginAndSignUpDialog::on_signUpButton_clicked()
         if(ui->comboBox->currentIndex() == 0)
             supEmail = ui->supervisorLineEdit->text();
         else
-            supEmail = email;
-
+            supEmail = "";
 
 
         authenticationPageApi::performSignUp(name,email,password,jobTitle,type,supEmail);
