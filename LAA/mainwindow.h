@@ -26,8 +26,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    QString curThreadId=NULL;
-    QString newThreadId=NULL;
+    QString curThreadId="";
+    QString newThreadId="";
 
 private slots:
     void on_pushButtonNewChat_clicked();

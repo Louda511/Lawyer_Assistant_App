@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>903</width>
-    <height>568</height>
+    <width>863</width>
+    <height>530</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,6 +17,12 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QSplitter" name="splitter">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -62,8 +68,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>297</width>
-             <height>413</height>
+             <width>293</width>
+             <height>395</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -88,8 +94,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>571</width>
-             <height>366</height>
+             <width>535</width>
+             <height>345</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -158,8 +164,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>903</width>
-     <height>25</height>
+     <width>863</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuLOG_OUT">

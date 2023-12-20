@@ -64,38 +64,36 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButtonNewChat_clicked()
 {
-    QString threadName = "Threaaad!!!";
-    QPushButton *button = new QPushButton(threadName);
-    buttonsThread.push_back(button);
-    // connect(button, &QPushButton::clicked, this, &MainWindow::onButtonClickedThread);
-    ui->scrollAreaThreadsWidgetContents1->addWidget(button);
 
-    // Create a QNetworkAccessManager
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    if(newThreadId == ""){
+        // Create a QNetworkAccessManager
+        QNetworkAccessManager *manager = new QNetworkAccessManager(this);
 
-    // Create a QNetworkRequest with the URL of your server
-    QNetworkRequest request(QUrl("https://lawyerassistant.up.railway.app/new"));  // Replace with your server URL
+        // Create a QNetworkRequest with the URL of your server
+        QNetworkRequest request(QUrl("https://lawyerassistant.up.railway.app/new"));  // Replace with your server URL
 
-    // Connect to the finished signal to handle the reply
-    connect(manager, &QNetworkAccessManager::finished, this, &MainWindow::onGetNetworkReply);
+        // Connect to the finished signal to handle the reply
+        connect(manager, &QNetworkAccessManager::finished, this, &MainWindow::onGetNetworkReply);
 
-    // Send the GET request
-    manager->get(request);
+        // Send the GET request
+        manager->get(request);
+    }
 }
 
 // Slot to handle the GET network reply
 void MainWindow::onGetNetworkReply(QNetworkReply *reply) {
     // Check for errors
     if (reply->error() != QNetworkReply::NoError) {
-        // Handle the error, show a message box for example
-        QMessageBox::critical(this, "Error", "Failed to send GET request: " + reply->errorString());
+        // Handle the error, show a message in status bar for example
+         statusBar()->showMessage("Try again, Failed to send GET request: " + reply->errorString(), 5000); // Show for 5 seconds
+
     } else {
         // Read the server's response as a string
-        QString responseData = QString::fromUtf8(reply->readAll());
-
+        newThreadId = QString::fromUtf8(reply->readAll());
+        curThreadId = newThreadId;
         // Process the response data
         qDebug() << "GET request successful!";
-        qDebug() << "Response data:" << responseData;
+        qDebug() << "Response data:" << newThreadId;
 
         // Perform actions with the response data, e.g., display it or use it in your application
     }
@@ -108,7 +106,7 @@ void MainWindow::onGetNetworkReply(QNetworkReply *reply) {
 
 void MainWindow::on_pushButtonSendReq_clicked()
 {
-    curThreadId ="thread_k6SV1GuiIIRXojo6cM5Wi7pF";
+    // curThreadId ="thread_k6SV1GuiIIRXojo6cM5Wi7pF";
     // Get the content of the QTextEdit
     QString content = ui->textEditMsg->toPlainText();  // Assuming textEditMsg is a member variable in your class
 
@@ -143,6 +141,7 @@ void MainWindow::onNetworkReply(QNetworkReply *reply) {
         // Handle the error, show a message box for example
         QMessageBox::critical(this, "Error", "Failed to send POST request: " + reply->errorString());
     } else {
+
         // Read the server's response
         QByteArray responseData = reply->readAll();
         QString responseString = QString::fromUtf8(responseData);
@@ -172,6 +171,15 @@ void MainWindow::onNetworkReply(QNetworkReply *reply) {
 
         // Clear the content of the QTextEdit
         ui->textEditMsg->clear();
+        if (curThreadId==newThreadId) {
+            newThreadId = "";
+            QString threadName = requestString.left(20);
+            QPushButton *button = new QPushButton(threadName);
+            buttonsThread.push_back(button);
+            // connect(button, &QPushButton::clicked, this, &MainWindow::onButtonClickedThread);
+            ui->scrollAreaThreadsWidgetContents1->addWidget(button);
+
+        }
         db_connection = QSqlDatabase::addDatabase("QSQLITE");
         db_connection.setDatabaseName(QCoreApplication::applicationDirPath()+"/Local.db");
 
