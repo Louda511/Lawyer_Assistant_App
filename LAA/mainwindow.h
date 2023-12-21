@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include "conversation.h"
 #include "qpushbutton.h"
 #include "chat.h"
 #include <QMainWindow>
@@ -33,7 +33,7 @@ private slots:
     void on_pushButtonNewChat_clicked();
 
     void onGetNetworkReply(QNetworkReply *reply);
-    // void onButtonClickedThread();
+    void onButtonClickedThread();
     void on_pushButtonSendReq_clicked();
     void onNetworkReply(QNetworkReply *reply);
 
