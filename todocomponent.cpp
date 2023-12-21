@@ -1,6 +1,7 @@
 
 // todocomponent.cpp
 #include "todocomponent.h"
+#include "todo.h"
 
 toDoComponent::toDoComponent(QWidget *parent) : QWidget(parent) {
 
@@ -25,7 +26,7 @@ toDoComponent::toDoComponent(QWidget *parent) : QWidget(parent) {
     hLayout->addWidget(deadLine);
     mainLayout->addLayout(hLayout);
 
-    if(userType == "supervisor")
+    if(userType != nullptr && userType == "supervisor")
     {
         lawyerOrSupervisorLabel->setText("Supervisor");
         deleteButton = new QPushButton("Delete", this);
@@ -43,6 +44,8 @@ toDoComponent::toDoComponent(QWidget *parent) : QWidget(parent) {
     // Set the main layout for the widget
     setLayout(mainLayout);
 }
+
+
 
 bool toDoComponent::performDeleteToDo()
 {

@@ -10,11 +10,19 @@ class toDosBoardWindow : public QMainWindow
 public:
     explicit toDosBoardWindow(QWidget *parent = nullptr);
 
+    void addToDoComponents(const QList<toDoComponent *> &toDoComponents);
+
+    void addSingleToDoComponent(toDoComponent *td);
+
+    QGridLayout* getToDosGridLayout() const;
+
+
 private:
     QGridLayout *mainGridLayout;
     QLabel *title;
     QPushButton *addToDoPushButton;
     QGridLayout *toDosGridLayout;
+
 
 signals:
 

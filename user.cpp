@@ -3,6 +3,7 @@
 // Constructors
 user::user() {
     // Initialize member variables if needed
+    //setType("supervisor");
 
 }
 // Initialize the static member

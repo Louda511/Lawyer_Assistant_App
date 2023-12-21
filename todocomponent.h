@@ -30,7 +30,9 @@ private:
     QLabel *deadLine;
     QLabel *lawyerOrSupervisorLabel;
     QPushButton *deleteButton;
+
     QString userType;
+    toDo *todo;
 };
 
 #endif // TODOCOMPONENT_H
