@@ -13,7 +13,7 @@ private:
 public:
     // Constructor
     Conversation(const QString& id, const QString& lawerId, const int& qtThreadId,const QSqlDatabase dbChatConnection);
-
+    Conversation(const int& qtThreadId);
     // Getter for id
     const QString& getId() const;
 

@@ -6,9 +6,19 @@
 // Constructor
 Conversation::Conversation(const QString& id, const QString& lawerId, const int& qtThreadId, const QSqlDatabase dbChatConnection)
     : id(id), lawerId(lawerId), qtThreadId(qtThreadId) {
-    // Additional initialization if needed
+    // Save the object to the database upon creation
+    if (!saveToDatabase()) {
+        qDebug() << "Failed to save conv to database";
+        // Handle the error as needed
+    }
 }
+Conversation::Conversation(const int& qtThreadId){
+    if (!loadFromDatabase(qtThreadId)) {
+        qDebug() << "Failed to load chat from database for id: " << qtThreadId;
+        // Handle the error as needed
+    }
 
+}
 // Getter for id
 const QString& Conversation::getId() const {
     return id;
