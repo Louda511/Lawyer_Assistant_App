@@ -6,6 +6,16 @@ user::user() {
     //setType("supervisor");
 
 }
+user::~user() {
+    // Clean up resources if needed
+    // ...
+
+    // Delete todos in the list
+    todos.clear();
+
+    // Reset the static instance
+    instance = nullptr;
+}
 // Initialize the static member
 user* user::instance = nullptr;
 

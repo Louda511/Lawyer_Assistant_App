@@ -23,7 +23,6 @@ loginAndSignUpDialog::loginAndSignUpDialog(QWidget *parent)
     ui->confirmPasswordLineEdit->setEchoMode(QLineEdit::Password);
     setWindowTitle("Sign In");
 
-
 }
 
 loginAndSignUpDialog::~loginAndSignUpDialog()

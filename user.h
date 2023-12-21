@@ -19,6 +19,7 @@ private:
 
     // Private constructor to prevent external instantiation
     user();
+    ~user();
 
 public:
 

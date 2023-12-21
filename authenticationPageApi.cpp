@@ -1,4 +1,5 @@
 #include "authenticationpageapi.h"
+#include "user.h"
 
 // Define the static member outside the class
 QNetworkAccessManager authenticationPageApi::manager;
@@ -13,6 +14,8 @@ void authenticationPageApi::performLogin(const QString &email, const QString &pa
 
     // Set the content type for the request
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+    request.setAttribute(QNetworkRequest::User, "login");
+
 
     // Prepare the data to be sent
     QUrlQuery postData;
@@ -38,6 +41,7 @@ void authenticationPageApi::performLogin(const QString &email, const QString &pa
     loop.exec();
 
     // Cleanup
+    reply->setProperty("requestType", "login");
     reply->deleteLater();
 }
 
@@ -53,6 +57,8 @@ void authenticationPageApi::performSignUp(const QString &name, const QString &em
 
     // Set the content type for the request
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    request.setAttribute(QNetworkRequest::User, "login");
+
 
     // Prepare the data to be sent
     QJsonObject postData;
@@ -84,10 +90,12 @@ void authenticationPageApi::performSignUp(const QString &name, const QString &em
     loop.exec();
 
     // Cleanup
-    reply->deleteLater();
+    reply->setProperty("requestType", "signup");
+    //reply->deleteLater();
 }
 
 // Static slot to handle the reply when the request is finished
+/*
 void authenticationPageApi::onRequestFinished(QNetworkReply *reply) {
     // Check for errors
     if (reply->error() == QNetworkReply::NoError) {
@@ -101,4 +109,44 @@ void authenticationPageApi::onRequestFinished(QNetworkReply *reply) {
 
     // Clean up
     reply->deleteLater();
+
 }
+*/
+// Static slot to handle the reply when the request is finished
+void authenticationPageApi::onRequestFinished(QNetworkReply *reply) {
+    // Check for errors
+    if (reply->error() == QNetworkReply::NoError) {
+        // Request was successful
+        qDebug() << "Connection established successfully!";
+        qDebug() << "Response:" << reply->readAll();
+
+        // Retrieve information from the request object
+        QString requestType = reply->request().attribute(QNetworkRequest::User).toString();
+
+
+        // Determine if the reply is from performLogin or performSignUp
+        if (requestType == "login") {
+            // This is the response from performLogin
+            qDebug() << "Response from performLogin";
+            //QJsonDocument jsonResponse = QJsonDocument::fromJson(reply->readAll());
+            //QJsonObject responseData = jsonResponse.object();
+            //emit readResponseData(responseData);
+
+        } else if (requestType == "signup") {
+            // This is the response from performSignUp
+            qDebug() << "Response from performSignUp";
+        } else {
+            // Handle other cases or errors
+            qDebug() << "Unknown response";
+        }
+    } else {
+        // Handle error
+        qDebug() << "Error:" << reply->errorString();
+    }
+
+    // Clean up
+    //reply->deleteLater();
+}
+
+// Static slot to handle the reply when the request is finished
+
