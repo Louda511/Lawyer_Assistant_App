@@ -257,7 +257,7 @@ void MainWindow::onButtonClickedThread(){
                         QString chatId = query.value("id").toString();
                         QString request = query.value("request").toString();
                         QString response = query.value("response").toString();
-                        QString conversationId = query.value("conversationId").toString();
+                        QString conversationId = query.value("thread_Id").toString();
                         QTextBrowser *responseTextBrowser = new QTextBrowser(this);
                         responseTextBrowser->setPlainText(response);
 
