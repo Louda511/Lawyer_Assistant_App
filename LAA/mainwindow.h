@@ -26,7 +26,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    QString curThreadId="thread_k6SV1GuiIIRXojo6cM5Wi7pF";
+    QString curThreadId="";
     QString newThreadId="";
 
 private slots:
