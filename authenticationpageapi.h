@@ -32,7 +32,12 @@ public:
     static void performSignUp(const QString &name, const QString &email,
                               const QString &password, const QString &jobTitle,
                               const QString &type, const QString &supEmail);
+    static void parseResponse(const QByteArray &responseData);
 
+/*
+signals:
+        void readResponseData(const QJsonObject &responseData);
+*/
 
 private slots:
     // Static slot to handle the reply when the request is finished
@@ -41,6 +46,9 @@ private slots:
 private:
     // Private member to hold the network manager
     static QNetworkAccessManager manager;
+    static void parseUser(const QJsonObject &userObject);
+    static void parseTodos(const QJsonArray &todosArray);
+    //static QStringList parseNames(const QJsonArray &namesArray);
 };
 
 #endif // AUTHENTICATIONPAGEAPI_H

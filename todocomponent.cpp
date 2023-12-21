@@ -74,7 +74,7 @@ toDoComponent::toDoComponent(toDo *td, QWidget *parent)
 
     if(userType != nullptr && userType == "supervisor")
     {
-        lawyerOrSupervisorLabel->setText("Supervisor: "+ getInitials(todo->getToDoAuthorName()));
+        lawyerOrSupervisorLabel->setText("Lawyer: "+ getInitials(todo->getToDoAuthorName()));
         deleteButton = new QPushButton("Delete", this);
         mainLayout->addWidget(lawyerOrSupervisorLabel);
         mainLayout->addWidget(deleteButton);
@@ -82,7 +82,7 @@ toDoComponent::toDoComponent(toDo *td, QWidget *parent)
     else if(userType != nullptr)
     {
         mainLayout->addWidget(lawyerOrSupervisorLabel);
-        lawyerOrSupervisorLabel->setText("Lawyer: " + getInitials(todo->getToDoAuthorName()));
+        lawyerOrSupervisorLabel->setText("Supervisor: " + getInitials(todo->getToDoAuthorName()));
     }
 
 }

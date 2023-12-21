@@ -117,8 +117,9 @@ void authenticationPageApi::onRequestFinished(QNetworkReply *reply) {
     // Check for errors
     if (reply->error() == QNetworkReply::NoError) {
         // Request was successful
+        QByteArray responseData = reply->readAll();
         qDebug() << "Connection established successfully!";
-        qDebug() << "Response:" << reply->readAll();
+        qDebug() << "Response:" << responseData;
 
         // Retrieve information from the request object
         QString requestType = reply->request().attribute(QNetworkRequest::User).toString();
@@ -128,9 +129,12 @@ void authenticationPageApi::onRequestFinished(QNetworkReply *reply) {
         if (requestType == "login") {
             // This is the response from performLogin
             qDebug() << "Response from performLogin";
-            //QJsonDocument jsonResponse = QJsonDocument::fromJson(reply->readAll());
-            //QJsonObject responseData = jsonResponse.object();
-            //emit readResponseData(responseData);
+            /*
+            QJsonDocument jsonResponse = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject responseData = jsonResponse.object();
+            emit (authenticationPageApi::readResponseData(responseData));
+            */
+            parseResponse(responseData);
 
         } else if (requestType == "signup") {
             // This is the response from performSignUp
@@ -146,6 +150,84 @@ void authenticationPageApi::onRequestFinished(QNetworkReply *reply) {
 
     // Clean up
     //reply->deleteLater();
+}
+
+void authenticationPageApi::parseResponse(const QByteArray &responseData) {
+    // Parse the JSON response
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(responseData);
+    QJsonObject jsonObject = jsonResponse.object();
+
+    // Extract relevant information
+    QString word = jsonObject.value("word").toString();
+    bool success = (word == "supervisor logged in successfully");
+
+    if (success) {
+        QJsonObject userObject = jsonObject.value("user").toObject();
+        parseUser(userObject);
+
+        // Check if "todos" is an array
+        if (jsonObject.value("todos").isArray()) {
+            QJsonArray todosArray = jsonObject.value("todos").toArray();
+            parseTodos(todosArray);
+        }
+
+    } else {
+        qDebug() << "Login unsuccessful. Word: " << word;
+    }
+}
+
+void authenticationPageApi::parseUser(const QJsonObject &userObject) {
+    qDebug() << "Parsing user data...";
+    // Extract and print user information
+    int id = userObject.value("id").toInt();
+    QString name = userObject.value("name").toString();
+    QString password = userObject.value("password").toString();
+    QString jobTitle = userObject.value("job_title").toString();
+    QString type = userObject.value("type").toString();
+    QString email = userObject.value("email").toString();
+    int supId = userObject.value("sup_id").toInt();
+
+    user::getInstance()->setId(id);
+    user::getInstance()->setName(name);
+    user::getInstance()->setPassword(password);
+    user::getInstance()->setJobTitle(jobTitle);
+    user::getInstance()->setType(type);
+    user::getInstance()->setEmail(email);
+    user::getInstance()->setSupervisorId(supId);
+
+    qDebug() << "User ID: " << id;
+    qDebug() << "Name: " << name;
+    qDebug() << "Password: " << password;
+    qDebug() << "Job Title: " << jobTitle;
+    qDebug() << "Type: " << type;
+    qDebug() << "Email: " << email;
+    qDebug() << "Supervisor ID: " << supId;
+}
+
+void authenticationPageApi::parseTodos(const QJsonArray &todosArray) {
+    qDebug() << "Parsing todos...";
+    // Iterate through the todos array and print each todo
+    for (const auto &todoValue : todosArray) {
+        QJsonObject todoObject = todoValue.toObject();
+        int todoId = todoObject.value("id").toInt();
+        QString title = todoObject.value("title").toString();
+        QString description = todoObject.value("description").toString();
+        QString deadline = todoObject.value("deadline").toString();
+        int locationId = todoObject.value("l_id").toInt();
+        bool done = todoObject.value("done").toBool();
+        QString name = todoObject.value("name").toString();
+
+       // QStringList names = parseNames(todoObject.value("name").toArray());
+
+        qDebug() << "Todo ID: " << todoId;
+        qDebug() << "Title: " << title;
+        qDebug() << "Description: " << description;
+        qDebug() << "Deadline: " << deadline;
+        qDebug() << "Location ID: " << locationId;
+        qDebug() << "done: " << done;
+        qDebug() << "name: " << name;
+        //qDebug() << "Names: " << names.join(", ");
+    }
 }
 
 // Static slot to handle the reply when the request is finished

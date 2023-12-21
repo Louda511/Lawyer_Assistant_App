@@ -2,6 +2,7 @@
 #include "todocomponent.h"
 #include "todosboardwindow.h"
 #include <QApplication>
+#include <assigntodo.h>
 
 int main(int argc, char *argv[])
 {
@@ -12,7 +13,7 @@ int main(int argc, char *argv[])
 
     // Create the main window
     user *u = user::getInstance();
-    u->setType("supervisor");
+    u->setType("lawyer");
     int taskId = 1;
     QString taskTitle = "Complete Assignment";
     QString taskDescription = "Finish the project before the deadline";
@@ -45,5 +46,9 @@ int main(int argc, char *argv[])
     // Show the main window
     mainWindow->show();
 
+    /*
+    assignToDo *atd = new assignToDo();
+    atd->show();
+*/
     return a.exec();
 }

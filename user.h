@@ -32,6 +32,8 @@ public:
     void setType(const QString& newType);
     void setEmail(const QString& newEmail);
     void setSupervisorId(int newSupId);
+    void setToDos(const QList<toDo> &newToDos);
+
 
     // Getters
     int getId() const;

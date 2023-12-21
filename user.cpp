@@ -56,6 +56,9 @@ void user::setEmail(const QString& newEmail) {
 void user::setSupervisorId(int newSupId) {
     sup_id = newSupId;
 }
+void user::setToDos(const QList<toDo> &newToDos) {
+    todos = newToDos;
+}
 
 // Getters
 int user::getId() const {
