@@ -15,7 +15,11 @@ public:
 
     void addSingleToDoComponent(toDoComponent *td);
 
+    //getters
+
     QGridLayout* getToDosGridLayout() const;
+    static toDosBoardWindow *getInstance();
+
 
 
 private:
@@ -23,6 +27,7 @@ private:
     QLabel *title;
     QPushButton *addToDoPushButton;
     QGridLayout *toDosGridLayout;
+    static toDosBoardWindow *instance;
 
 
 signals:

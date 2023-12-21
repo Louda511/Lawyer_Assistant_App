@@ -6,35 +6,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    /*
+
     loginAndSignUpDialog w;
     w.show();
-*/
-    /*
-    QMainWindow mainWindow;
 
-    // Create a toDoComponent
-    toDoComponent *todoComponent = new toDoComponent(&mainWindow);
-
-    // Set the toDoComponent as the central widget of the main window
-    mainWindow.setCentralWidget(todoComponent);
-
-    // Show the main window
-    mainWindow.show();
-    //todoComponent->performDeleteToDo();
-
-    */
-    /*
-    toDosBoardWindow mainWindow;
-
-    // Create a toDoComponent
-    mainWindow.show();
-    */
-    // Set the toDoComponent as the central widget of toDosBoardWindow
-
-
-    // You can call methods on todoComponent as needed
-   // qDebug() << "toDoComponent size:" << todoComponent->size();
     // Create the main window
     user *u = user::getInstance();
     u->setType("supervisor");
@@ -43,10 +18,12 @@ int main(int argc, char *argv[])
     QString taskDescription = "Finish the project before the deadline";
     QString taskDeadline = "2023-12-31";
     int lawyerId = 123;
+    bool done = true;
+    QString name = "Ahmed Khaled";
 
-    toDo *td = new toDo(taskId, taskTitle, taskDescription, taskDeadline, lawyerId);
+    toDo *td = new toDo(taskId, taskTitle, taskDescription, taskDeadline, lawyerId, done, name);
 
-    toDosBoardWindow mainWindow;
+    toDosBoardWindow *mainWindow = toDosBoardWindow::getInstance();
 
     // Create some toDoComponent objects for testing
     toDoComponent *component1 = new toDoComponent(td);
@@ -60,13 +37,13 @@ int main(int argc, char *argv[])
 
     // Test the addToDoComponents function
     //mainWindow.addSingleToDoComponent(component1);
-    mainWindow.addToDoComponents(toDoComponentsList);
+    mainWindow->addToDoComponents(toDoComponentsList);
     // Set up the main window layout
 
     // Set the main window layout
 
     // Show the main window
-    mainWindow.show();
+    mainWindow->show();
 
     return a.exec();
 }

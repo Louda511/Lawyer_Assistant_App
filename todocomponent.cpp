@@ -17,26 +17,26 @@ toDoComponent::toDoComponent(QWidget *parent) : QWidget(parent) {
 
 
     // Create layouts
-    QHBoxLayout *hLayout = new QHBoxLayout();
+    //QHBoxLayout *hLayout = new QHBoxLayout();
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
     // Add components to the main vertical layout
     mainLayout->addWidget(checkbox);
     mainLayout->addWidget(description);
-    hLayout->addWidget(deadLine);
-    mainLayout->addLayout(hLayout);
+    mainLayout->addWidget(deadLine);
+    //mainLayout->addLayout(hLayout);
 
     if(userType != nullptr && userType == "supervisor")
     {
-        lawyerOrSupervisorLabel->setText("Supervisor");
+        lawyerOrSupervisorLabel->setText("Lawyer: ");
         deleteButton = new QPushButton("Delete", this);
-        hLayout->addWidget(lawyerOrSupervisorLabel);
+        mainLayout->addWidget(lawyerOrSupervisorLabel);
         mainLayout->addWidget(deleteButton);
     }
     else if(userType != nullptr)
     {
-        hLayout->addWidget(lawyerOrSupervisorLabel);
-        lawyerOrSupervisorLabel->setText("Lawyer");
+        mainLayout->addWidget(lawyerOrSupervisorLabel);
+        lawyerOrSupervisorLabel->setText("Supercisor: ");
     }
 
 
@@ -55,31 +55,34 @@ toDoComponent::toDoComponent(toDo *td, QWidget *parent)
       lawyerOrSupervisorLabel(new QLabel(this))
 
 {
+    //NOTE
+    description->acceptRichText();
     checkbox->setText(todo->getTitle());
+    checkbox->setChecked(todo->isDone());
     description->setText(todo->getDescription());
-    deadLine->setText(todo->getDeadline());
+    deadLine->setText("Deadline: " + todo->getDeadline());
 
     // Create layouts
-    QHBoxLayout *hLayout = new QHBoxLayout();
+    //QHBoxLayout *hLayout = new QHBoxLayout();
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
     // Add components to the main vertical layout
     mainLayout->addWidget(checkbox);
     mainLayout->addWidget(description);
-    hLayout->addWidget(deadLine);
-    mainLayout->addLayout(hLayout);
+    mainLayout->addWidget(deadLine);
+    //mainLayout->addLayout(hLayout);
 
     if(userType != nullptr && userType == "supervisor")
     {
-        lawyerOrSupervisorLabel->setText("Supervisor: "+ getInitials(todo->getSupervisor()));
+        lawyerOrSupervisorLabel->setText("Supervisor: "+ getInitials(todo->getToDoAuthorName()));
         deleteButton = new QPushButton("Delete", this);
-        hLayout->addWidget(lawyerOrSupervisorLabel);
+        mainLayout->addWidget(lawyerOrSupervisorLabel);
         mainLayout->addWidget(deleteButton);
     }
     else if(userType != nullptr)
     {
-        hLayout->addWidget(lawyerOrSupervisorLabel);
-        lawyerOrSupervisorLabel->setText("Lawyer");
+        mainLayout->addWidget(lawyerOrSupervisorLabel);
+        lawyerOrSupervisorLabel->setText("Lawyer: " + getInitials(todo->getToDoAuthorName()));
     }
 
 }

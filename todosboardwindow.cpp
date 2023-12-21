@@ -13,16 +13,19 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     QWidget *centralWidget = new QWidget();
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout(centralWidget);
 
+
     // Creating the horizontal layout
     QHBoxLayout *hLayout = new QHBoxLayout();
     hLayout->addWidget(title);
+    hLayout->addWidget(addToDoPushButton);
+    addToDoPushButton->setVisible(false);
+
 
     title->setVisible(true);
     if(user::getInstance()->getType() == "supervisor")
     {
 
          addToDoPushButton->setVisible(true);
-         hLayout->addWidget(addToDoPushButton);
     }
 
     // Set the alignment of hLayout to the top of the available space
@@ -67,4 +70,14 @@ void toDosBoardWindow::addSingleToDoComponent(toDoComponent *td)
         // Handle the case where toDosGridLayout or td is not initialized
         qDebug() << "Error: toDosGridLayout or toDoComponent is not initialized!";
     }
+}
+
+toDosBoardWindow* toDosBoardWindow::instance = nullptr;
+
+toDosBoardWindow* toDosBoardWindow::getInstance() {
+    // Create the instance if it doesn't exist yet
+    if (instance == nullptr) {
+        instance = new toDosBoardWindow();
+    }
+    return instance;
 }

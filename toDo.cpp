@@ -5,8 +5,8 @@ toDo::toDo() {
     // Initialize member variables if needed
 }
 
-toDo::toDo(int newId, const QString& newTitle, const QString& newDescription, const QString& newDeadline, int newLawyerId)
-    : id(newId), title(newTitle), description(newDescription), deadline(newDeadline), l_id(newLawyerId)
+toDo::toDo(int newId, const QString& newTitle, const QString& newDescription, const QString& newDeadline, int newLawyerId, bool done, const QString& name)
+    : id(newId), title(newTitle), description(newDescription), deadline(newDeadline), l_id(newLawyerId), done(done), toDoAuthorName(name)
 {
     // Additional initialization if needed
 }
@@ -28,12 +28,15 @@ void toDo::setDeadline(const QString& newDeadline) {
     deadline = newDeadline;
 }
 
-void toDo::setSupervisor(const QString& newSupervisor) {
-    supervisor = newSupervisor;
+void toDo::setToDoAuthorName(const QString& newName) {
+    toDoAuthorName = newName;
 }
 
-void toDo::setListId(int newListId) {
+void toDo::setToDoAuthorId(int newListId) {
     l_id = newListId;
+}
+void toDo::setDone(bool newDone) {
+    done = newDone;
 }
 
 // Getters
@@ -52,9 +55,12 @@ const QString& toDo::getDescription() const {
 const QString& toDo::getDeadline() const {
     return deadline;
 }
-const QString& toDo::getSupervisor() const {
-    return supervisor;
+const QString& toDo::getToDoAuthorName() const {
+    return toDoAuthorName;
 }
-int toDo::getListId() const {
+int toDo::getToDoAuthorId() const {
     return l_id;
+}
+bool toDo::isDone() const {
+    return done;
 }
