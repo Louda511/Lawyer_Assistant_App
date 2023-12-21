@@ -31,11 +31,11 @@ MainWindow::MainWindow(QWidget *parent)
         db_connection.open();
         QSqlDatabase::database().transaction();
         QSqlQuery queryview(db_connection);
-
         QString stringValue = QString::number(count);
+        // QString stringValue = QString::number(count);
 
         queryview.prepare("select substr(Request,1, 20) from (select Request from (select Request,min(ID) from Chats where Thread_id='"+stringValue+"'));");
-        
+
         queryview.exec();
         QSqlDatabase::database().commit();
 
@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         QPushButton *button = new QPushButton(threadName);
         buttonsThread.push_back(button);
-        // connect(button, &QPushButton::clicked, this, &MainWindow::onButtonClickedThread);
+        connect(button, &QPushButton::clicked, this, &MainWindow::onButtonClickedThread);
         ui->scrollAreaThreadsWidgetContents1->addWidget(button);
         count--;
     }
@@ -64,6 +64,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButtonNewChat_clicked()
 {
+
 
     if(newThreadId == ""){
         // Create a QNetworkAccessManager
@@ -139,7 +140,7 @@ void MainWindow::onNetworkReply(QNetworkReply *reply) {
     // Check for errors
     if (reply->error() != QNetworkReply::NoError) {
         // Handle the error, show a message box for example
-        QMessageBox::critical(this, "Error", "Failed to send POST request: " + reply->errorString());
+        statusBar()->showMessage("Try again, Failed to send POST request: " + reply->errorString(), 5000);
     } else {
 
         // Read the server's response
@@ -176,18 +177,49 @@ void MainWindow::onNetworkReply(QNetworkReply *reply) {
             QString threadName = requestString.left(20);
             QPushButton *button = new QPushButton(threadName);
             buttonsThread.push_back(button);
-            // connect(button, &QPushButton::clicked, this, &MainWindow::onButtonClickedThread);
+            int lastIndex = buttonsThread.size() - 1;
+            connect(button, &QPushButton::clicked, this, &MainWindow::onButtonClickedThread);
             ui->scrollAreaThreadsWidgetContents1->addWidget(button);
+            db_connection = QSqlDatabase::addDatabase("QSQLITE");
+            db_connection.setDatabaseName(QCoreApplication::applicationDirPath()+"/Local.db");
 
+            db_connection.open();
+            Conversation newConv(curThreadId,"lawyer1",lastIndex,db_connection);
+            db_connection.close();
         }
         db_connection = QSqlDatabase::addDatabase("QSQLITE");
         db_connection.setDatabaseName(QCoreApplication::applicationDirPath()+"/Local.db");
 
         db_connection.open();
-        Chat newChat(requestString,responseString,curThreadId,db_connection);
+        Chat newChat(requestString,responseString,QString::number(buttonsThread.size() - 1),db_connection);
         db_connection.close();
     }
 
     // Clean up the reply object
     reply->deleteLater();
+}
+void MainWindow::onButtonClickedThread(){
+    // Determine which button triggered the signal
+    QPushButton *senderButton = qobject_cast<QPushButton *>(sender());
+    if (senderButton) {
+        // Get the index of the clicked button in the array
+        int buttonIndex = -1;
+        for (int i = 0; i < buttonsThread.size(); ++i) {
+            if (buttonsThread[i] == senderButton) {
+                buttonIndex = i;
+                break;
+            }
+        }
+
+        if (buttonIndex != -1) {
+            // Get the text of the clicked button
+            QString buttonText = senderButton->text();
+            qDebug() << "Button clicked:" << buttonText << " at index:" << buttonIndex;
+
+            // Add your custom code for button clicks here
+            // For example, change the color of the clicked button
+            senderButton->setStyleSheet("background-color: green;");
+        }
+    }
+
 }

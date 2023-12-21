@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include "conversation.h"
 #include "qpushbutton.h"
 #include "chat.h"
 #include <QMainWindow>
@@ -26,14 +26,14 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    QString curThreadId="";
+    QString curThreadId="thread_k6SV1GuiIIRXojo6cM5Wi7pF";
     QString newThreadId="";
 
 private slots:
     void on_pushButtonNewChat_clicked();
 
     void onGetNetworkReply(QNetworkReply *reply);
-    // void onButtonClickedThread();
+    void onButtonClickedThread();
     void on_pushButtonSendReq_clicked();
     void onNetworkReply(QNetworkReply *reply);
 
