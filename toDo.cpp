@@ -28,6 +28,10 @@ void toDo::setDeadline(const QString& newDeadline) {
     deadline = newDeadline;
 }
 
+void toDo::setSupervisor(const QString& newSupervisor) {
+    supervisor = newSupervisor;
+}
+
 void toDo::setListId(int newListId) {
     l_id = newListId;
 }
@@ -48,7 +52,9 @@ const QString& toDo::getDescription() const {
 const QString& toDo::getDeadline() const {
     return deadline;
 }
-
+const QString& toDo::getSupervisor() const {
+    return supervisor;
+}
 int toDo::getListId() const {
     return l_id;
 }

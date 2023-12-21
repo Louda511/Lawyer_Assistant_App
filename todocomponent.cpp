@@ -45,6 +45,44 @@ toDoComponent::toDoComponent(QWidget *parent) : QWidget(parent) {
     setLayout(mainLayout);
 }
 
+toDoComponent::toDoComponent(toDo *td, QWidget *parent)
+    : QWidget(parent),
+      userType(user::getInstance()->getType()),
+      todo(td),
+      checkbox(new QCheckBox(this)),
+      description(new QTextBrowser(this)),
+      deadLine(new QLabel(this)),
+      lawyerOrSupervisorLabel(new QLabel(this))
+
+{
+    checkbox->setText(todo->getTitle());
+    description->setText(todo->getDescription());
+    deadLine->setText(todo->getDeadline());
+
+    // Create layouts
+    QHBoxLayout *hLayout = new QHBoxLayout();
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+
+    // Add components to the main vertical layout
+    mainLayout->addWidget(checkbox);
+    mainLayout->addWidget(description);
+    hLayout->addWidget(deadLine);
+    mainLayout->addLayout(hLayout);
+
+    if(userType != nullptr && userType == "supervisor")
+    {
+        lawyerOrSupervisorLabel->setText("Supervisor: "+ getInitials(todo->getSupervisor()));
+        deleteButton = new QPushButton("Delete", this);
+        hLayout->addWidget(lawyerOrSupervisorLabel);
+        mainLayout->addWidget(deleteButton);
+    }
+    else if(userType != nullptr)
+    {
+        hLayout->addWidget(lawyerOrSupervisorLabel);
+        lawyerOrSupervisorLabel->setText("Lawyer");
+    }
+
+}
 
 
 bool toDoComponent::performDeleteToDo()
@@ -62,4 +100,31 @@ void toDoComponent::setDeadLineLabel(QString deadline) {
 
 void toDoComponent::setLawyerOrSupervisorLabel(QString label) {
     lawyerOrSupervisorLabel->setText(label);
+}
+
+toDoComponent::~toDoComponent() {
+    // Perform necessary cleanup, delete dynamically allocated objects
+    delete checkbox;
+    delete description;
+    delete deadLine;
+    delete lawyerOrSupervisorLabel;
+    if(userType == "supervisor")
+    {
+    delete deleteButton;
+    }
+}
+
+QString toDoComponent::getInitials(const QString& fullName)  {
+    QStringList nameParts = fullName.split(' ', Qt::SkipEmptyParts);
+
+    if (nameParts.size() >= 2) {
+        // Get the first character of the first name
+        QChar initial = nameParts[0].at(0);
+
+        // Concatenate the initial with the last name
+        return QString("%1. %2").arg(QString(initial).toUpper()).arg(nameParts[1]);
+    } else {
+        // Handle the case where there are not enough parts
+        return fullName;
+    }
 }

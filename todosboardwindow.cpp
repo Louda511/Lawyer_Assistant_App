@@ -15,10 +15,15 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
 
     // Creating the horizontal layout
     QHBoxLayout *hLayout = new QHBoxLayout();
-    title->setVisible(true);
-    addToDoPushButton->setVisible(true);
     hLayout->addWidget(title);
-    hLayout->addWidget(addToDoPushButton);
+
+    title->setVisible(true);
+    if(user::getInstance()->getType() == "supervisor")
+    {
+
+         addToDoPushButton->setVisible(true);
+         hLayout->addWidget(addToDoPushButton);
+    }
 
     // Set the alignment of hLayout to the top of the available space
     hLayout->setAlignment(Qt::AlignTop);

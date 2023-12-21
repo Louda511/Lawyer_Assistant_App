@@ -9,6 +9,7 @@ class toDosBoardWindow : public QMainWindow
     Q_OBJECT
 public:
     explicit toDosBoardWindow(QWidget *parent = nullptr);
+    //~toDosBoardWindow(); // Destructor declaration
 
     void addToDoComponents(const QList<toDoComponent *> &toDoComponents);
 

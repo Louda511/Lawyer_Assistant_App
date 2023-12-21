@@ -36,13 +36,23 @@ int main(int argc, char *argv[])
     // You can call methods on todoComponent as needed
    // qDebug() << "toDoComponent size:" << todoComponent->size();
     // Create the main window
+    user *u = user::getInstance();
+    u->setType("supervisor");
+    int taskId = 1;
+    QString taskTitle = "Complete Assignment";
+    QString taskDescription = "Finish the project before the deadline";
+    QString taskDeadline = "2023-12-31";
+    int lawyerId = 123;
+
+    toDo *td = new toDo(taskId, taskTitle, taskDescription, taskDeadline, lawyerId);
+
     toDosBoardWindow mainWindow;
 
     // Create some toDoComponent objects for testing
-    toDoComponent *component1 = new toDoComponent(nullptr);
-    toDoComponent *component2 = new toDoComponent(nullptr);
-    toDoComponent *component3 = new toDoComponent(nullptr);
-    toDoComponent *component4 = new toDoComponent(nullptr);
+    toDoComponent *component1 = new toDoComponent(td);
+    toDoComponent *component2 = new toDoComponent(td);
+    toDoComponent *component3 = new toDoComponent(td);
+    toDoComponent *component4 = new toDoComponent();
 
     // Create a QList to hold the toDoComponent objects
     QList<toDoComponent *> toDoComponentsList;

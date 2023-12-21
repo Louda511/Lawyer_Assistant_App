@@ -10,6 +10,7 @@ private:
     QString title;
     QString description;
     QString deadline;
+    QString supervisor;
     int l_id;
 
 public:
@@ -23,6 +24,8 @@ public:
     void setDescription(const QString& newDescription);
     void setDeadline(const QString& newDeadline);
     void setListId(int newListId);
+    void setSupervisor(const QString& newSupervisor); // New setter for supervisor
+
 
     // Getters
     int getId() const;
@@ -30,6 +33,8 @@ public:
     const QString& getDescription() const;
     const QString& getDeadline() const;
     int getListId() const;
+    const QString& getSupervisor() const; // New getter for supervisor
+
 };
 
 #endif // TODO_H

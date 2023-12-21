@@ -11,6 +11,7 @@ CONFIG += c++17
 
 SOURCES += \
     authenticationpageapi.cpp \
+    boardwindowapi.cpp \
     main.cpp \
     loginandsignupdialog.cpp \
     \  # todocomponent.cpp # This line is added by qmake for the generated moc file
@@ -21,6 +22,7 @@ SOURCES += \
 
 HEADERS += \
     authenticationpageapi.h \
+    boardwindowapi.h \
     loginandsignupdialog.h \
     todo.h \
     todocomponent.h \
