@@ -14,6 +14,7 @@ class loginAndSignUpDialog : public QDialog
 public:
     loginAndSignUpDialog(QWidget *parent = nullptr);
     ~loginAndSignUpDialog();
+    static loginAndSignUpDialog* getInstance();
 
 private slots:
     void on_loginButton_clicked();
@@ -24,5 +25,6 @@ private slots:
 
 private:
     Ui::loginAndSignUpDialog *ui;
+    static loginAndSignUpDialog* instance;
 };
 #endif // LOGINANDSIGNUPDIALOG_H

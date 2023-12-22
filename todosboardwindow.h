@@ -19,6 +19,7 @@ public:
 
     QGridLayout* getToDosGridLayout() const;
     static toDosBoardWindow *getInstance();
+    QGridLayout* getToDosGridLayout();
 
 
 

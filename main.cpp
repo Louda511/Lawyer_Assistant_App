@@ -8,9 +8,9 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    loginAndSignUpDialog w;
-    w.show();
-
+    loginAndSignUpDialog *w = loginAndSignUpDialog::getInstance();
+    w->show();
+/*
     // Create the main window
     user *u = user::getInstance();
     u->setType("lawyer");
@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 
     toDo *td = new toDo(taskId, taskTitle, taskDescription, taskDeadline, lawyerId, done, name);
 
-    toDosBoardWindow *mainWindow = toDosBoardWindow::getInstance();
+    //toDosBoardWindow *mainWindow = toDosBoardWindow::getInstance();
 
     // Create some toDoComponent objects for testing
     toDoComponent *component1 = new toDoComponent(td);
@@ -38,17 +38,43 @@ int main(int argc, char *argv[])
 
     // Test the addToDoComponents function
     //mainWindow.addSingleToDoComponent(component1);
-    mainWindow->addToDoComponents(toDoComponentsList);
     // Set up the main window layout
 
     // Set the main window layout
 
     // Show the main window
-    mainWindow->show();
+    //mainWindow->show();
 
-    /*
+
     assignToDo *atd = new assignToDo();
     atd->show();
+    user *currentUser = user::getInstance();
+    toDosBoardWindow *mainWindow = toDosBoardWindow::getInstance();
+
+    QList<toDo*> todos = currentUser->getToDos();
+
+    // Iterate through the todos
+    qDebug() << "User's Todos:";
+    for (const toDo* todo : todos) { // Use a pointer here
+        qDebug() << "u_Todo ID:" << todo->getId(); // Dereference the pointer to access members
+        qDebug() << "u_Title:" << todo->getTitle();
+        qDebug() << "u_Description:" << todo->getDescription();
+        qDebug() << "u_Deadline:" << todo->getDeadline();
+        // Add more fields as needed
+        qDebug() << "------------------------";
+    }
+    for (auto todo : todos)
+    {
+
+          toDoComponent *component1 = new toDoComponent(todo);
+        toDoComponentsList << component1;
+
+
+    }
+    mainWindow->addToDoComponents(toDoComponentsList);
+    mainWindow->show();
 */
     return a.exec();
+
+
 }

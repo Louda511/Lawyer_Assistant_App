@@ -110,3 +110,13 @@ void loginAndSignUpDialog::on_comboBox_currentIndexChanged(int index)
     }
 }
 
+loginAndSignUpDialog* loginAndSignUpDialog::instance = nullptr;
+
+// Function to get the instance of the singleton class
+loginAndSignUpDialog* loginAndSignUpDialog::getInstance() {
+    // Create the instance if it doesn't exist yet
+    if (instance == nullptr) {
+        instance = new loginAndSignUpDialog();
+    }
+    return instance;
+}

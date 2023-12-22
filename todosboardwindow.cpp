@@ -9,6 +9,7 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     toDosGridLayout(new QGridLayout())
 {
     setWindowTitle("To Do's Board");
+    //resize(1200, 500);
 
     QWidget *centralWidget = new QWidget();
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout(centralWidget);
@@ -36,10 +37,14 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     mainVBoxLayout->addLayout(toDosGridLayout);
 
     setCentralWidget(centralWidget);
-    resize(1200, 500);
-
+    hLayout->setAlignment(Qt::AlignTop);
     // Your additional initialization code here
+    qDebug() << "Layout Size: " << hLayout->sizeHint();
+    //qDebug() << "Layout Size: " << mainGridLayout->sizeHint();
+
+
 }
+
 
 void toDosBoardWindow::addToDoComponents(const QList<toDoComponent *> &toDoComponents)
 {
@@ -48,7 +53,7 @@ void toDosBoardWindow::addToDoComponents(const QList<toDoComponent *> &toDoCompo
     int col = 0;
 
     for (toDoComponent *component : toDoComponents) {
-        toDosGridLayout->addWidget(component, row, col);
+         toDosGridLayout->addWidget(component, row, col,1,1,Qt::AlignLeft);
 
         // Adjust the row and column for the next component
         col++;
@@ -80,4 +85,8 @@ toDosBoardWindow* toDosBoardWindow::getInstance() {
         instance = new toDosBoardWindow();
     }
     return instance;
+}
+QGridLayout* toDosBoardWindow::getToDosGridLayout()
+{
+    return toDosGridLayout;
 }

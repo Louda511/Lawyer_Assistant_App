@@ -84,6 +84,7 @@ toDoComponent::toDoComponent(toDo *td, QWidget *parent)
         mainLayout->addWidget(lawyerOrSupervisorLabel);
         lawyerOrSupervisorLabel->setText("Supervisor: " + getInitials(todo->getToDoAuthorName()));
     }
+    setMaximumSize(300,200);
 
 }
 

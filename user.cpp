@@ -56,7 +56,7 @@ void user::setEmail(const QString& newEmail) {
 void user::setSupervisorId(int newSupId) {
     sup_id = newSupId;
 }
-void user::setToDos(const QList<toDo> &newToDos) {
+void user::setToDos(const QList<toDo*>& newToDos) {
     todos = newToDos;
 }
 
@@ -90,10 +90,10 @@ int user::getSupervisorId() const {
 }
 
 // Function implementation of todos QList
-
-const QList<toDo>& user::getToDos() const {
+const QList<toDo*>& user::getToDos() const {
     return todos;
 }
-void user::appendToDo(const toDo& newToDo) {
+
+void user::appendToDo(toDo* newToDo) {
     todos.append(newToDo);
 }

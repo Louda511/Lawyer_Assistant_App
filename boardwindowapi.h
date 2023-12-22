@@ -10,12 +10,15 @@ class boardWindowApi : public QObject
     Q_OBJECT
 public:
     boardWindowApi();
+    boardWindowApi* getInstance();
 
 public slots:
     void toDosComponentsListInitializer(QList<toDo> *td);
 
 private:
     QList<QSharedPointer<toDoComponent>> toDosComponentList;
+    static boardWindowApi *instance;
+
 };
 
 #endif // BOARDWINDOWAPI_H

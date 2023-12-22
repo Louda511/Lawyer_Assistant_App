@@ -1,5 +1,8 @@
 #include "authenticationpageapi.h"
+#include "todosboardwindow.h"
 #include "user.h"
+#include "loginandsignupdialog.h"
+#include <QMessageBox>
 
 // Define the static member outside the class
 QNetworkAccessManager authenticationPageApi::manager;
@@ -164,6 +167,9 @@ void authenticationPageApi::parseResponse(const QByteArray &responseData) {
     if (success) {
         QJsonObject userObject = jsonObject.value("user").toObject();
         parseUser(userObject);
+        //close the login page and open todos page
+        loginAndSignUpDialog *w = loginAndSignUpDialog::getInstance();
+        w->close();
 
         // Check if "todos" is an array
         if (jsonObject.value("todos").isArray()) {
@@ -173,6 +179,7 @@ void authenticationPageApi::parseResponse(const QByteArray &responseData) {
 
     } else {
         qDebug() << "Login unsuccessful. Word: " << word;
+        QMessageBox::critical(nullptr, "Error", word, QMessageBox::Ok);
     }
 }
 
@@ -213,22 +220,55 @@ void authenticationPageApi::parseTodos(const QJsonArray &todosArray) {
         QString title = todoObject.value("title").toString();
         QString description = todoObject.value("description").toString();
         QString deadline = todoObject.value("deadline").toString();
-        int locationId = todoObject.value("l_id").toInt();
+        int toDoAuthorId = todoObject.value("l_id").toInt();
         bool done = todoObject.value("done").toBool();
         QString name = todoObject.value("name").toString();
 
-       // QStringList names = parseNames(todoObject.value("name").toArray());
+        toDo *td = new toDo(todoId, title, description, deadline,toDoAuthorId,done,name);
+        user::getInstance()->appendToDo(td);
 
         qDebug() << "Todo ID: " << todoId;
         qDebug() << "Title: " << title;
         qDebug() << "Description: " << description;
         qDebug() << "Deadline: " << deadline;
-        qDebug() << "Location ID: " << locationId;
+        qDebug() << "Location ID: " << toDoAuthorId;
         qDebug() << "done: " << done;
         qDebug() << "name: " << name;
         //qDebug() << "Names: " << names.join(", ");
     }
+
+    QList<toDoComponent *> toDoComponentsList;
+
+
+    user *currentUser = user::getInstance();
+    toDosBoardWindow *mainWindow = toDosBoardWindow::getInstance();
+
+    QList<toDo*> todos = currentUser->getToDos();
+
+    // Iterate through the todos
+    qDebug() << "User's Todos:";
+    for (const toDo* todo : todos) { // Use a pointer here
+        qDebug() << "u_Todo ID:" << todo->getId(); // Dereference the pointer to access members
+        qDebug() << "u_Title:" << todo->getTitle();
+        qDebug() << "u_Description:" << todo->getDescription();
+        qDebug() << "u_Deadline:" << todo->getDeadline();
+        // Add more fields as needed
+        qDebug() << "------------------------";
+    }
+    for (auto todo : todos)
+    {
+
+        toDoComponent *component1 = new toDoComponent(todo);
+        toDoComponentsList << component1;
+
+
+    }
+    mainWindow->addToDoComponents(toDoComponentsList);
+    mainWindow->show();
+
+
 }
+
 
 // Static slot to handle the reply when the request is finished
 
