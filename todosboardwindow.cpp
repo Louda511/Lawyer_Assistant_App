@@ -8,14 +8,17 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     addToDoPushButton(new QPushButton("Add a To Do", this)),
     toDosGridLayout(new QGridLayout()),
     row(0),
-    column(0)
-
+    column(0),
+    mainToolBar(new QToolBar("Tool bar",this))
 {
     setWindowTitle("To Do's Board");
     //resize(1200, 500);
+    mainToolBar->addSeparator();
+    mainToolBar->addWidget(new QLabel("Custom Widget"));
 
     QWidget *centralWidget = new QWidget();
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout(centralWidget);
+    mainVBoxLayout->addWidget(mainToolBar);
 
 
     // Creating the horizontal layout
@@ -43,14 +46,16 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
 
     // Add hLayout and toDosGridLayout to the main layout
     mainVBoxLayout->addLayout(hLayout);
-    mainVBoxLayout->addLayout(toDosGridLayout);
+    mainVBoxLayout->addLayout(toDosGridLayout,1);
 
     setCentralWidget(centralWidget);
     hLayout->setAlignment(Qt::AlignTop);
     // Your additional initialization code here
     qDebug() << "Layout Size: " << hLayout->sizeHint();
     //qDebug() << "Layout Size: " << mainGridLayout->sizeHint();
-
+    addToDoPushButton->setMaximumWidth(100);
+    addToDoPushButton->setMaximumHeight(30);
+    title->setMaximumHeight(30);
 
 
 }
@@ -61,7 +66,9 @@ void toDosBoardWindow::addToDoComponents(const QList<toDoComponent *> &toDoCompo
     // Add ToDoComponents to the main grid layout
 
     for (toDoComponent *component : toDoComponents) {
-         toDosGridLayout->addWidget(component, row, column,1,1,Qt::AlignLeft);
+         toDosGridLayout->addWidget(component, row, column, 1, 1, Qt::AlignLeft | Qt::AlignTop);
+         qDebug() << "Row: " << row << ", Column: " << column;
+
 
         // Adjust the row and column for the next component
         column++;
@@ -80,7 +87,7 @@ void toDosBoardWindow::addToDoComponents(toDoComponent *component)
     qDebug() << rowCount;
     qDebug() << columnCount;
     // Add the component to the current position
-    toDosGridLayout->addWidget(component, row, column, 1, 1, Qt::AlignLeft);
+    toDosGridLayout->addWidget(component, row, column, 1, 1, Qt::AlignLeft | Qt::AlignTop);
 
     // Move to the next column
     column++;
@@ -96,6 +103,7 @@ void toDosBoardWindow::addToDoComponents(toDoComponent *component)
         row++;
         column = 0;
     }
+    qDebug() << "Row: " << row << ", Column: " << column;
 
 }
 

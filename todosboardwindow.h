@@ -4,6 +4,8 @@
 #include "assigntodo.h"
 
 #include <QMainWindow>
+#include <QToolBar>
+
 
 class toDosBoardWindow : public QMainWindow
 {
@@ -22,6 +24,7 @@ public:
     QGridLayout* getToDosGridLayout();
     void addToDoComponents(toDoComponent *component);
 
+
 public slots:
     void onAddToDoButtonClicked();
 
@@ -35,6 +38,7 @@ private:
     QGridLayout *toDosGridLayout;
     static toDosBoardWindow *instance;
     int row, column;
+    QToolBar *mainToolBar;
 
 
 
