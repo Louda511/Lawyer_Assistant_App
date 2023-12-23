@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     loginAndSignUpDialog *w = loginAndSignUpDialog::getInstance();
+
     w->show();
 /*
     // Create the main window
@@ -75,6 +76,8 @@ int main(int argc, char *argv[])
     mainWindow->show();
 */
     return a.exec();
+
+
 
 
 }

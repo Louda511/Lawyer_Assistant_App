@@ -7,6 +7,7 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     title(new QLabel("To Do's Board", this)),
     addToDoPushButton(new QPushButton("Add a To Do", this)),
     toDosGridLayout(new QGridLayout())
+
 {
     setWindowTitle("To Do's Board");
     //resize(1200, 500);
@@ -19,7 +20,6 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     QHBoxLayout *hLayout = new QHBoxLayout();
     hLayout->addWidget(title);
     hLayout->addWidget(addToDoPushButton);
-    addToDoPushButton->setVisible(false);
 
 
     title->setVisible(true);
@@ -28,6 +28,13 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
 
          addToDoPushButton->setVisible(true);
     }
+    else
+    {
+
+         addToDoPushButton->setVisible(false);
+    }
+    connect(addToDoPushButton, &QPushButton::clicked,this, &toDosBoardWindow::onAddToDoButtonClicked);
+
 
     // Set the alignment of hLayout to the top of the available space
     hLayout->setAlignment(Qt::AlignTop);
@@ -41,6 +48,7 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     // Your additional initialization code here
     qDebug() << "Layout Size: " << hLayout->sizeHint();
     //qDebug() << "Layout Size: " << mainGridLayout->sizeHint();
+
 
 
 }
@@ -89,4 +97,11 @@ toDosBoardWindow* toDosBoardWindow::getInstance() {
 QGridLayout* toDosBoardWindow::getToDosGridLayout()
 {
     return toDosGridLayout;
+}
+void toDosBoardWindow::onAddToDoButtonClicked()
+{
+    // Emit the signal when the button is clicked
+    assignToDo::getInstance()->show();
+
+    // Additional logic for handling the button click can be added here if needed
 }

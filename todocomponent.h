@@ -27,7 +27,8 @@ public:
     void setLawyerOrSupervisorLabel(QString label);
     QString getInitials(const QString& fullName);
 
-
+signals:
+    void deleteToDo(toDo *td);
 
 private:
     QString userType;

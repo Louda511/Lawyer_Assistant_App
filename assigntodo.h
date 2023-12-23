@@ -15,15 +15,20 @@ class assignToDo : public QDialog
 {
     Q_OBJECT
 public:
-    explicit assignToDo(QWidget *parent = nullptr);
+
+    //getters
+    static assignToDo* getInstance();
 
 signals:
+
 
 private slots:
     void updateDate();
 
 
 private:
+    explicit assignToDo(QWidget *parent = nullptr);
+
     QLabel *titleLabel;
     QLabel *descriptionLabel;
     QLabel *deadLineLabel;
@@ -34,6 +39,7 @@ private:
     QComboBox *asigneeComboBox;
     QDialogButtonBox *buttonBox;
     QCalendarWidget *calendarWidget;  // Calendar widget
+    static assignToDo *instance;
 };
 
 #endif // ASSIGNTODO_H

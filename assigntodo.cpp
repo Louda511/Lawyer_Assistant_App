@@ -1,5 +1,15 @@
 #include "assigntodo.h"
-#include "assigntodo.h"
+
+assignToDo* assignToDo::instance = nullptr;
+
+assignToDo* assignToDo::getInstance()
+{
+    if (assignToDo::instance == nullptr)
+    {
+        instance = new assignToDo();
+    }
+    return instance;
+}
 
 assignToDo::assignToDo(QWidget *parent)
     : QDialog(parent),

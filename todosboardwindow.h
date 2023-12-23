@@ -1,6 +1,7 @@
 #ifndef TODOSBOARDWINDOW_H
 #define TODOSBOARDWINDOW_H
 #include "todocomponent.h"
+#include "assigntodo.h"
 
 #include <QMainWindow>
 
@@ -8,7 +9,6 @@ class toDosBoardWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit toDosBoardWindow(QWidget *parent = nullptr);
     //~toDosBoardWindow(); // Destructor declaration
 
     void addToDoComponents(const QList<toDoComponent *> &toDoComponents);
@@ -21,9 +21,13 @@ public:
     static toDosBoardWindow *getInstance();
     QGridLayout* getToDosGridLayout();
 
+public slots:
+    void onAddToDoButtonClicked();
 
 
 private:
+    explicit toDosBoardWindow(QWidget *parent = nullptr);
+
     QGridLayout *mainGridLayout;
     QLabel *title;
     QPushButton *addToDoPushButton;
@@ -31,7 +35,7 @@ private:
     static toDosBoardWindow *instance;
 
 
-signals:
+
 
 };
 
