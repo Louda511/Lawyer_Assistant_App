@@ -20,6 +20,7 @@ public:
     QGridLayout* getToDosGridLayout() const;
     static toDosBoardWindow *getInstance();
     QGridLayout* getToDosGridLayout();
+    void addToDoComponents(toDoComponent *component);
 
 public slots:
     void onAddToDoButtonClicked();
@@ -33,6 +34,7 @@ private:
     QPushButton *addToDoPushButton;
     QGridLayout *toDosGridLayout;
     static toDosBoardWindow *instance;
+    int row, column;
 
 
 

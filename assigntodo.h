@@ -10,7 +10,11 @@
 #include <QVBoxLayout>
 #include <QComboBox>
 #include <QCalendarWidget>
-
+#include <QMessageBox>
+#include <QPushButton>
+#include "todo.h"
+#include "todocomponent.h"
+#include "todosboardwindow.h"
 class assignToDo : public QDialog
 {
     Q_OBJECT
@@ -24,6 +28,8 @@ signals:
 
 private slots:
     void updateDate();
+    void onOkButtonClicked();
+
 
 
 private:

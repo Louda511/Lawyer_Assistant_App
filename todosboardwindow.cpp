@@ -6,7 +6,9 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     : QMainWindow(parent),
     title(new QLabel("To Do's Board", this)),
     addToDoPushButton(new QPushButton("Add a To Do", this)),
-    toDosGridLayout(new QGridLayout())
+    toDosGridLayout(new QGridLayout()),
+    row(0),
+    column(0)
 
 {
     setWindowTitle("To Do's Board");
@@ -57,19 +59,44 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
 void toDosBoardWindow::addToDoComponents(const QList<toDoComponent *> &toDoComponents)
 {
     // Add ToDoComponents to the main grid layout
-    int row = 0;
-    int col = 0;
 
     for (toDoComponent *component : toDoComponents) {
-         toDosGridLayout->addWidget(component, row, col,1,1,Qt::AlignLeft);
+         toDosGridLayout->addWidget(component, row, column,1,1,Qt::AlignLeft);
 
         // Adjust the row and column for the next component
-        col++;
-        if (col >= 3) {
-            col = 0;
+        column++;
+        if (column >= 3) {
+            column = 0;
             row++;
         }
     }
+}
+
+
+void toDosBoardWindow::addToDoComponents(toDoComponent *component)
+{
+    int rowCount = toDosGridLayout->rowCount();
+    int columnCount = toDosGridLayout->columnCount();
+    qDebug() << rowCount;
+    qDebug() << columnCount;
+    // Add the component to the current position
+    toDosGridLayout->addWidget(component, row, column, 1, 1, Qt::AlignLeft);
+
+    // Move to the next column
+    column++;
+
+    // Set column stretch to make sure items are added horizontally
+    for (int c = 0; c < 3; ++c) {
+        toDosGridLayout->setColumnStretch(c, 1);
+    }
+
+    // Check if the maximum columns in a row is reached
+    if (column >= 3) {
+        // Move to the next row
+        row++;
+        column = 0;
+    }
+
 }
 
 QGridLayout* toDosBoardWindow::getToDosGridLayout() const {
