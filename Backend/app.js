@@ -282,6 +282,27 @@ function cleanDate(date1) {
   return formattedDateString;
 }
 
+// converting deadline date to proper format
+function convertDateFormat(inputDate) {
+  // Split the input date into components
+  var dateComponents = inputDate.split('/');
+
+  // Create a new Date object using the components
+  var formattedDate = new Date(dateComponents[2], dateComponents[0] - 1, dateComponents[1]);
+
+  // Extract the year, month, and day from the Date object
+  var year = formattedDate.getFullYear();
+  var month = (formattedDate.getMonth() + 1).toString().padStart(2, '0');
+  var day = formattedDate.getDate().toString().padStart(2, '0');
+
+  // Construct the desired format
+  var outputDate = year + '-' + month + '-' + day;
+
+  return outputDate;
+}
+
+
+
 // Get Last Output ID
 async function getLastId(threadId) {
   const threadMessages = await openai.beta.threads.messages.list(
@@ -523,10 +544,10 @@ app.post('/login', async (req, res) => {
 app.post('/create', async (req, res) => {
   let title = req.body.title;
   let description = req.body.description;
-  let deadline = req.body.deadline;
+  let deadline = convertDateFormat(req.body.deadline);
   let l_id = lawyer.id;
   let junior_id = req.body.junior_id;
-  
+
   let result = await createTodo(title, description, deadline, l_id);
   let todo_id = await fetchTodoId(title, description, l_id);
 
