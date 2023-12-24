@@ -142,7 +142,12 @@ void authenticationPageApi::onRequestFinished(QNetworkReply *reply) {
         } else if (requestType == "signup") {
             // This is the response from performSignUp
             qDebug() << "Response from performSignUp";
-        } else {
+        }
+        else if(requestType == "getJuniorsData")
+        {
+
+        }
+        else {
             // Handle other cases or errors
             qDebug() << "Unknown response";
         }
@@ -266,6 +271,33 @@ void authenticationPageApi::parseTodos(const QJsonArray &todosArray) {
     mainWindow->addToDoComponents(toDoComponentsList);
     mainWindow->show();
 
+
+}
+
+void authenticationPageApi::getJuniorsData()
+{
+    QUrl juniorsUrl("https://lawyerassistant.up.railway.app/juniors");
+
+    // Create a request
+    QNetworkRequest request(juniorsUrl);
+
+    // Perform the GET request
+    QNetworkReply *reply = manager.get(request);
+    request.setAttribute(QNetworkRequest::User, "getJuniorsData");
+
+
+    // Create an event loop to wait for the reply to finish
+    QEventLoop loop;
+
+    auto onFinished = [&]() {
+        authenticationPageApi::onRequestFinished(reply);
+        loop.quit();
+    };
+
+    QObject::connect(reply, &QNetworkReply::finished, onFinished);
+    loop.exec();
+
+    // Check for errors
 
 }
 

@@ -16,6 +16,7 @@ private:
     int sup_id;
     static user *instance;
     QList<toDo*> todos;
+    QList<user*> juniors;
 
     // Private constructor to prevent external instantiation
     user();
@@ -33,6 +34,8 @@ public:
     void setEmail(const QString& newEmail);
     void setSupervisorId(int newSupId);
     void setToDos(const QList<toDo*>& newToDos);
+    void setJuniors(const QList<user*>& newJuniors);
+
 
     // Getters
     int getId() const;
@@ -43,6 +46,9 @@ public:
     const QString& getEmail() const;
     int getSupervisorId() const;
     const QList<toDo*>& getToDos() const;
+    const QList<user*>& getJuniors() const;
+
+
     // Function to get the instance of the singleton class
     static user* getInstance();
     void appendToDo(toDo* newToDo);

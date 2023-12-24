@@ -66,9 +66,15 @@ void assignToDo::onOkButtonClicked()
     QString deadLine = this->deadLineDateEdit->text();
     QString asignee = this->asigneeComboBox->currentText();
 
+
+
+
     toDo *td = new toDo(0,title, description, deadLine,0,false,asignee);
     toDoComponent *component1 = new toDoComponent (td);
     toDosBoardWindow::getInstance()->addToDoComponents(component1);
+    boardWindowApi::getInstance()->postToDo(title,description,deadLine,39);
+
     QMessageBox::information(this,"Message", "To Do Added Successfully");
+    qDebug() << deadLine;
 }
 

@@ -59,6 +59,9 @@ void user::setSupervisorId(int newSupId) {
 void user::setToDos(const QList<toDo*>& newToDos) {
     todos = newToDos;
 }
+void user::setJuniors(const QList<user*>& newJuniors) {
+    juniors = newJuniors;
+}
 
 // Getters
 int user::getId() const {
@@ -92,6 +95,10 @@ int user::getSupervisorId() const {
 // Function implementation of todos QList
 const QList<toDo*>& user::getToDos() const {
     return todos;
+}
+
+const QList<user*>& user::getJuniors() const {
+    return juniors;
 }
 
 void user::appendToDo(toDo* newToDo) {

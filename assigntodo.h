@@ -15,6 +15,8 @@
 #include "todo.h"
 #include "todocomponent.h"
 #include "todosboardwindow.h"
+#include "boardwindowapi.h"
+#include <QChar>
 class assignToDo : public QDialog
 {
     Q_OBJECT

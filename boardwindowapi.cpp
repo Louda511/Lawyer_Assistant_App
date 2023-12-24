@@ -1,9 +1,7 @@
 #include "boardwindowapi.h"
 #include "todosboardwindow.h"
 
-boardWindowApi::boardWindowApi()
-{
-}
+
 boardWindowApi* boardWindowApi::instance = nullptr;
 
 boardWindowApi* boardWindowApi::getInstance() {
@@ -13,32 +11,52 @@ boardWindowApi* boardWindowApi::getInstance() {
     }
     return instance;
 }
-void boardWindowApi::toDosComponentsListInitializer(QList<toDo> *td)
-{
-    QList<toDo>::iterator it;
-    for (it = td->begin(); it != td->end(); ++it) {
-        // Create QSharedPointer and add it to the list
-        QSharedPointer<toDoComponent> todoComponent = QSharedPointer<toDoComponent>::create(&(*it));
-        toDosComponentList.append(todoComponent);
-    }
-}
-/*
-void boardWindowApi::addToDoComponents(const QList<toDoComponent *> &toDoComponents)
-{
-    // Add ToDoComponents to the main grid layout
-    int row = 0;
-    int col = 0;
-    QGridLayout* toDosGridLayout = toDosBoardWindow::getInstance()->getToDosGridLayout();
 
-    for (toDoComponent *component : toDoComponents) {
-        toDosGridLayout->addWidget(component, row, col);
-
-        // Adjust the row and column for the next component
-        col++;
-        if (col >= 3) {
-            col = 0;
-            row++;
-        }
-    }
+boardWindowApi::boardWindowApi(QObject *parent) : QObject(parent)
+{
+    manager = new QNetworkAccessManager(this);
 }
-*/
+
+void boardWindowApi::postToDo(const QString &title, const QString &description, const QString &deadline, int juniorId)
+{
+    QUrl url("https://lawyerassistant.up.railway.app/create");
+
+    QJsonObject data;
+    data["title"] = title;
+    data["description"] = description;
+    data["deadline"] = deadline;
+    data["junior_id"] = juniorId;
+
+    QByteArray jsonData = QJsonDocument(data).toJson();
+
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    connect(manager, &QNetworkAccessManager::finished, this, &boardWindowApi::handleReply);
+
+    manager->post(request, jsonData);
+}
+
+void boardWindowApi::handleReply(QNetworkReply *reply)
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        QByteArray responseData = reply->readAll();
+        qDebug() << "Response Body:" << responseData;
+    } else {
+        qDebug() << "Error:" << reply->errorString();
+        qDebug() << "Server Response:" << reply->readAll();
+
+    }
+
+    reply->deleteLater();
+}
+
+
+
+
+boardWindowApi::~boardWindowApi()
+{
+    disconnect(manager, &QNetworkAccessManager::finished, this, &boardWindowApi::handleReply);
+    // Other cleanup code if needed
+}
+

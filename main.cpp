@@ -11,6 +11,30 @@ int main(int argc, char *argv[])
     loginAndSignUpDialog *w = loginAndSignUpDialog::getInstance();
 
     w->show();
+
+    QNetworkAccessManager manager;
+
+    // URL of the endpoint
+    QUrl juniorsUrl("https://lawyerassistant.up.railway.app/juniors");
+
+    // Create a request
+    QNetworkRequest request(juniorsUrl);
+
+    // Perform the GET request
+    QNetworkReply *reply = manager.get(request);
+
+    // Create an event loop to wait for the reply to finish
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    // Check for errors
+    if (reply->error() == QNetworkReply::NoError) {
+        // Request was successful
+        QByteArray responseData = reply->readAll();
+        qDebug() << responseData;
+
+    }
 /*
     // Create the main window
     user *u = user::getInstance();

@@ -27,12 +27,12 @@ public:
 
     // Static function to perform a login POST request
     static void performLogin(const QString &email, const QString &password);
-
     // Static function to perform a sign-up (register) POST request
     static void performSignUp(const QString &name, const QString &email,
                               const QString &password, const QString &jobTitle,
                               const QString &type, const QString &supEmail);
     static void parseResponse(const QByteArray &responseData);
+    static void getJuniorsData();
 
 /*
 signals:
