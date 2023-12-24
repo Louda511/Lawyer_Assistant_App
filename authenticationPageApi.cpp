@@ -185,6 +185,7 @@ void authenticationPageApi::parseResponse(const QByteArray &responseData) {
         else
         {
             toDosBoardWindow::getInstance()->show();
+            QMessageBox::information(nullptr, "Information", "No ToDo's Found");
         }
 
     } else {
