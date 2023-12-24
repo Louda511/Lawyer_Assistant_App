@@ -2,6 +2,7 @@
 #define LOGINANDSIGNUPDIALOG_H
 
 #include <QDialog>
+#include <todosboardwindow.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class loginAndSignUpDialog; }

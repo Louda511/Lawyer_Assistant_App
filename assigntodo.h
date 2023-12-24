@@ -24,6 +24,8 @@ public:
 
     //getters
     static assignToDo* getInstance();
+    void setAsigneeComboBoxValues();
+
 
 signals:
 

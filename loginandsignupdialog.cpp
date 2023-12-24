@@ -37,6 +37,7 @@ void loginAndSignUpDialog::on_loginButton_clicked()
     if(ui->stackedWidget->currentIndex() == 0)
     {
         authenticationPageApi::performLogin(ui->emailLineEditLogIn->text(),ui->passwordLineEditLogIn->text());
+        authenticationPageApi::getJuniorsData();
     }
     else
     {
@@ -79,6 +80,16 @@ void loginAndSignUpDialog::on_signUpButton_clicked()
         qDebug() << "Supervisor Email:" << supEmail;
 
         authenticationPageApi::performSignUp(name,email,password,jobTitle,type,supEmail);
+
+        user *u = user::getInstance();
+        u->setName(name);
+        u->setEmail(email);
+        u->setPassword(password);
+        u->setJobTitle(jobTitle);
+        u->setType(type);
+
+        toDosBoardWindow::getInstance()->show();
+        //loginAndSignUpDialog::getInstance()->close();
     }
     else
     {

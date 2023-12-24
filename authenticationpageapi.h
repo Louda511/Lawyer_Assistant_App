@@ -32,6 +32,7 @@ public:
                               const QString &password, const QString &jobTitle,
                               const QString &type, const QString &supEmail);
     static void parseResponse(const QByteArray &responseData);
+    static void parseJuniorsData(const QByteArray &juniorsResponseData);
     static void getJuniorsData();
 
 /*

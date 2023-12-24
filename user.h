@@ -20,11 +20,14 @@ private:
 
     // Private constructor to prevent external instantiation
     user();
+
     ~user();
 
 public:
 
-
+    user(int newId, const QString& newName, const QString& newPassword,
+         const QString& newJobTitle, const QString& newType,
+         const QString& newEmail, int newSupId);
     // Setters
     void setId(int newId);
     void setName(const QString& newName);

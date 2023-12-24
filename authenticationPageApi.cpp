@@ -142,10 +142,11 @@ void authenticationPageApi::onRequestFinished(QNetworkReply *reply) {
         } else if (requestType == "signup") {
             // This is the response from performSignUp
             qDebug() << "Response from performSignUp";
+
         }
         else if(requestType == "getJuniorsData")
         {
-
+            parseJuniorsData(responseData);
         }
         else {
             // Handle other cases or errors
@@ -180,6 +181,10 @@ void authenticationPageApi::parseResponse(const QByteArray &responseData) {
         if (jsonObject.value("todos").isArray()) {
             QJsonArray todosArray = jsonObject.value("todos").toArray();
             parseTodos(todosArray);
+        }
+        else
+        {
+            toDosBoardWindow::getInstance()->show();
         }
 
     } else {
@@ -280,15 +285,14 @@ void authenticationPageApi::getJuniorsData()
 
     // Create a request
     QNetworkRequest request(juniorsUrl);
+    request.setAttribute(QNetworkRequest::User, "getJuniorsData");
 
     // Perform the GET request
     QNetworkReply *reply = manager.get(request);
-    request.setAttribute(QNetworkRequest::User, "getJuniorsData");
-
+    reply->setProperty("requestType", "getJuniorsData");
 
     // Create an event loop to wait for the reply to finish
     QEventLoop loop;
-
     auto onFinished = [&]() {
         authenticationPageApi::onRequestFinished(reply);
         loop.quit();
@@ -301,6 +305,46 @@ void authenticationPageApi::getJuniorsData()
 
 }
 
+void authenticationPageApi::parseJuniorsData(const QByteArray &responseData)
+{
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(responseData);
+    QJsonObject jsonObject = jsonResponse.object();
+    QJsonArray userArray = jsonObject["user"].toArray();
+    QList<user*> juniorsList;
+
+    for (const auto &userValue : userArray)
+    {
+
+
+        QJsonObject userObject = userValue.toObject();
+
+        // Create a new user instance
+
+
+        int id = userObject["id"].toInt();
+        QString name = userObject["name"].toString();
+        QString password = userObject["password"].toString();
+        QString jobTitle = userObject["job_title"].toString();
+        QString type = userObject["type"].toString();
+        QString email = userObject["email"].toString();
+        int supervisorId = userObject["sup_id"].toInt();
+
+        user* newJunior = new user(id,name, password, jobTitle, type, email, supervisorId);
+        juniorsList.append(newJunior);
+
+        user::getInstance()->setJuniors(juniorsList);
+    }
+
+    // Iterate through the juniors list and print information
+    qDebug() << "Iterating through juniors list:";
+    for (user* junior : juniorsList) {
+        qDebug() << "ID: " << junior->getId();
+        qDebug() << "Name: " << junior->getName();
+        qDebug() << "Job Title: " << junior->getJobTitle();
+        qDebug() << "Email: " << junior->getEmail();
+        qDebug() << "-------------------------";
+    }
+}
 
 // Static slot to handle the reply when the request is finished
 

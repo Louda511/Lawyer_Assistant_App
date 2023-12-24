@@ -6,6 +6,14 @@ user::user() {
     //setType("supervisor");
 
 }
+user::user(int newId, const QString& newName, const QString& newPassword,
+     const QString& newJobTitle, const QString& newType,
+     const QString& newEmail, int newSupId)
+    : id(newId), name(newName), password(newPassword),
+    job_title(newJobTitle), type(newType),
+    email(newEmail), sup_id(newSupId) {
+    // Additional initialization code, if needed
+}
 user::~user() {
     // Clean up resources if needed
     // ...

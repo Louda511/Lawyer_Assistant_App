@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 
     w->show();
 
+    /*
     QNetworkAccessManager manager;
 
     // URL of the endpoint
@@ -35,6 +36,13 @@ int main(int argc, char *argv[])
         qDebug() << responseData;
 
     }
+*/
+
+    // Assuming you have some juniors added to the user instance
+
+
+    // Other main code...
+
 /*
     // Create the main window
     user *u = user::getInstance();
