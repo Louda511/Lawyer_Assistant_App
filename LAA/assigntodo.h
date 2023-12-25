@@ -17,6 +17,7 @@
 #include "todosboardwindow.h"
 #include "boardwindowapi.h"
 #include <QChar>
+
 class assignToDo : public QDialog
 {
     Q_OBJECT
@@ -33,8 +34,6 @@ signals:
 private slots:
     void updateDate();
     void onOkButtonClicked();
-
-
 
 private:
     explicit assignToDo(QWidget *parent = nullptr);
