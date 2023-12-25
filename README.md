@@ -51,6 +51,7 @@ qt-frontend/: Qt Front-End Application.
 backend/: Backend Components.
 ## Contributors
 Thank you to all the contributors who have helped make Lawyer Assistant App better! ✨
+- [Abdelrahman El-Badawy](https://github.com/AbdelrahmanBadwy/)
 - [Ahmed Khaled](https://github.com/Louda511)
 - [Mohamed Magdy](https://github.com/MohamedMagdy097)
 - [Mahmoud Abdelhady](https://github.com/mahmoud-abdelhadi)
