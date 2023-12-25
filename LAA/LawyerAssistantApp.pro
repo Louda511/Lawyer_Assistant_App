@@ -1,5 +1,4 @@
-QT       += core gui
-QT       += core network
+QT       += core gui sql network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,11 +14,13 @@ SOURCES += \
     boardwindowapi.cpp \
     main.cpp \
     loginandsignupdialog.cpp \
-    \  # todocomponent.cpp # This line is added by qmake for the generated moc file
     todo.cpp \
     todocomponent.cpp \
     todosboardwindow.cpp \
-    user.cpp
+    user.cpp \
+    chat.cpp \
+    conversation.cpp \
+    mainwindow.cpp
 
 HEADERS += \
     assigntodo.h \
@@ -29,10 +30,19 @@ HEADERS += \
     todo.h \
     todocomponent.h \
     todosboardwindow.h \
-    user.h
+    user.h \
+    chat.h \
+    conversation.h \
+    mainwindow.h
+
+
+
 
 FORMS += \
-    loginandsignupdialog.ui
+    loginandsignupdialog.ui \
+    mainwindow.ui
+
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
