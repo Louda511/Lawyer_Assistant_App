@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "qtextbrowser.h"
 #include "ui_mainwindow.h"
+#include "toDosBoardWindow.h"
+
 // thread_k6SV1GuiIIRXojo6cM5Wi7pF
 int count=0,c=0;
 
@@ -67,6 +69,8 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     db_connection.close();
+    connect(ui->actionShowBoard, &QAction::triggered, this, &MainWindow::openToDosBoard);
+
 }
 
 MainWindow::~MainWindow()
@@ -309,4 +313,10 @@ void MainWindow::onButtonClickedThread(){
         }
     }
 
+}
+
+void MainWindow::openToDosBoard()
+{
+    MainWindow::getInstance()->hide();
+    toDosBoardWindow::getInstance()->show();
 }

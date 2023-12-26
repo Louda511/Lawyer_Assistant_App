@@ -13,6 +13,7 @@
 #include "qsqldatabase.h"
 #include <QtSql>
 #include <QSqlDatabase>
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -33,11 +34,13 @@ public:
 
 private slots:
     void on_pushButtonNewChat_clicked();
-
     void onGetNetworkReply(QNetworkReply *reply);
     void onButtonClickedThread();
     void on_pushButtonSendReq_clicked();
     void onNetworkReply(QNetworkReply *reply);
+    void openToDosBoard();
+
+
 
 private:
     Ui::MainWindow *ui;

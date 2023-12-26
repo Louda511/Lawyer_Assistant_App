@@ -68,8 +68,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>324</width>
-             <height>395</height>
+             <width>379</width>
+             <height>375</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -128,8 +128,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>504</width>
-             <height>373</height>
+             <width>449</width>
+             <height>361</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -152,23 +152,23 @@
      <x>0</x>
      <y>0</y>
      <width>863</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuLOG_OUT">
-    <property name="title">
-     <string>LOG OUT</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuTO_DO">
     <property name="title">
-     <string>TO DO</string>
+     <string>ToDo's Board</string>
     </property>
+    <addaction name="actionShowBoard"/>
    </widget>
-   <addaction name="menuLOG_OUT"/>
    <addaction name="menuTO_DO"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionShowBoard">
+   <property name="text">
+    <string>Show Board</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

@@ -9,12 +9,23 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     toDosGridLayout(new QGridLayout()),
     row(0),
     column(0),
-    mainToolBar(new QToolBar("Tool bar",this))
+    mainToolBar(new QToolBar("Tool bar",this)),
+    chatPage(new QPushButton("AI Chats", this)),
+    menuBar(new QMenuBar(this))
+
 {
     setWindowTitle("To Do's Board");
     //resize(1200, 500);
-    mainToolBar->addSeparator();
-    mainToolBar->addWidget(new QLabel("Custom Widget"));
+
+
+    setMenuBar(menuBar);
+    // Create a menu
+    QMenu *chatsMenu = menuBar->addMenu("Chats");
+    // Add actions or submenus to the "Chats" menu if needed
+    // For example:
+    QAction *openChatAction = chatsMenu->addAction("Open Chat");
+    //Connect the action to a slot if needed
+    connect(openChatAction, &QAction::triggered, this, &toDosBoardWindow::openChat);
 
     QWidget *centralWidget = new QWidget();
     QVBoxLayout *mainVBoxLayout = new QVBoxLayout(centralWidget);
@@ -56,8 +67,6 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     addToDoPushButton->setMaximumWidth(150);
     addToDoPushButton->setMaximumHeight(30);
     title->setMaximumHeight(30);
-
-
 
 }
 
@@ -140,4 +149,10 @@ void toDosBoardWindow::onAddToDoButtonClicked()
     assignToDo::getInstance()->show();
 
     // Additional logic for handling the button click can be added here if needed
+}
+void toDosBoardWindow::openChat()
+{
+    toDosBoardWindow::getInstance()->hide();
+    MainWindow::getInstance()->show();
+
 }

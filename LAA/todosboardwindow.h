@@ -1,10 +1,11 @@
 #ifndef TODOSBOARDWINDOW_H
 #define TODOSBOARDWINDOW_H
-#include "todocomponent.h"
-#include "assigntodo.h"
-
 #include <QMainWindow>
 #include <QToolBar>
+#include <QMenuBar>
+#include "todocomponent.h"
+#include "assigntodo.h"
+#include "mainwindow.h"
 
 
 class toDosBoardWindow : public QMainWindow
@@ -27,6 +28,7 @@ public:
 
 public slots:
     void onAddToDoButtonClicked();
+    void openChat();
 
 
 private:
@@ -39,8 +41,8 @@ private:
     static toDosBoardWindow *instance;
     int row, column;
     QToolBar *mainToolBar;
-
-
+    QPushButton *chatPage;
+    QMenuBar *menuBar;
 
 
 };
