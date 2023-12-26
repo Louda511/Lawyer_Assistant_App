@@ -17,6 +17,10 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     setWindowTitle("To Do's Board");
     //resize(1200, 500);
 
+    //set label properties
+    QFont font("Arial", 25);
+    font.setBold(true);
+    title->setFont(font);
 
     setMenuBar(menuBar);
     // Create a menu
