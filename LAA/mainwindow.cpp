@@ -3,6 +3,18 @@
 #include "ui_mainwindow.h"
 // thread_k6SV1GuiIIRXojo6cM5Wi7pF
 int count=0,c=0;
+
+MainWindow* MainWindow::instance = nullptr;
+
+// Function to get the instance of the singleton class
+MainWindow* MainWindow::getInstance() {
+    // Create the instance if it doesn't exist yet
+    if (instance == nullptr) {
+        instance = new MainWindow();
+    }
+    return instance;
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)

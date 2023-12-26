@@ -58,6 +58,7 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     title->setMaximumHeight(30);
 
 
+
 }
 
 

@@ -22,7 +22,13 @@ loginAndSignUpDialog::loginAndSignUpDialog(QWidget *parent)
     ui->passwordLineEditSignUp->setEchoMode(QLineEdit::Password);
     ui->confirmPasswordLineEdit->setEchoMode(QLineEdit::Password);
     setWindowTitle("Sign In");
-
+    /*
+    QPixmap pix(":/pics/Logo.jpg");
+    int w,h;
+    w = ui->logoPic->width();
+    h = ui->logoPic->height();
+    ui->logoPic->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
+*/
 }
 
 loginAndSignUpDialog::~loginAndSignUpDialog()

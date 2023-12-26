@@ -28,6 +28,8 @@ public:
     ~MainWindow();
     QString curThreadId="";
     QString newThreadId="";
+    static MainWindow* getInstance();
+
 
 private slots:
     void on_pushButtonNewChat_clicked();
@@ -41,5 +43,7 @@ private:
     Ui::MainWindow *ui;
     std::vector<QPushButton*> buttonsThread;
     QSqlDatabase db_connection;
+    static MainWindow *instance;
+
 };
 #endif // MAINWINDOW_H
