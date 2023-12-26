@@ -40,6 +40,10 @@ private:
     QLabel *lawyerOrSupervisorLabel;
     QPushButton *deleteButton;
 
+private slots:
+    void onCheckBoxStateChanged(int state);
+
+
 
 };
 

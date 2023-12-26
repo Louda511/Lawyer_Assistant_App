@@ -94,8 +94,7 @@ void loginAndSignUpDialog::on_signUpButton_clicked()
         u->setJobTitle(jobTitle);
         u->setType(type);
 
-        toDosBoardWindow::getInstance()->show();
-        //loginAndSignUpDialog::getInstance()->close();
+
     }
     else
     {

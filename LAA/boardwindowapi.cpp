@@ -37,6 +37,24 @@ void boardWindowApi::postToDo(const QString &title, const QString &description, 
     manager->post(request, jsonData);
 }
 
+void boardWindowApi::toDoDone(int id)
+{
+    QUrl url("https://lawyerassistant.up.railway.app/done");
+
+    QJsonObject data;
+    data["id"] = id;
+
+    QByteArray jsonData = QJsonDocument(data).toJson();
+
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    connect(manager, &QNetworkAccessManager::finished, this, &boardWindowApi::handleReply);
+
+    manager->post(request, jsonData);
+}
+
+
 void boardWindowApi::handleReply(QNetworkReply *reply)
 {
     if (reply->error() == QNetworkReply::NoError) {

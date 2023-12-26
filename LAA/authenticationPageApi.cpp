@@ -142,6 +142,8 @@ void authenticationPageApi::onRequestFinished(QNetworkReply *reply) {
         } else if (requestType == "signup") {
             // This is the response from performSignUp
             qDebug() << "Response from performSignUp";
+            toDosBoardWindow::getInstance()->show();
+            loginAndSignUpDialog::getInstance()->close();
 
         }
         else if(requestType == "getJuniorsData")
@@ -167,8 +169,11 @@ void authenticationPageApi::parseResponse(const QByteArray &responseData) {
     QJsonObject jsonObject = jsonResponse.object();
 
     // Extract relevant information
+    QString user_type = user::getInstance()->getType();
     QString word = jsonObject.value("word").toString();
-    bool success = (word == "supervisor logged in successfully");
+    bool success;
+
+    success = (word == "supervisor logged in successfully" || word == "logged in successfully");
 
     if (success) {
         QJsonObject userObject = jsonObject.value("user").toObject();
@@ -188,7 +193,8 @@ void authenticationPageApi::parseResponse(const QByteArray &responseData) {
             QMessageBox::information(nullptr, "Information", "No ToDo's Found");
         }
 
-    } else {
+    }
+    else {
         qDebug() << "Login unsuccessful. Word: " << word;
         QMessageBox::critical(nullptr, "Error", word, QMessageBox::Ok);
     }

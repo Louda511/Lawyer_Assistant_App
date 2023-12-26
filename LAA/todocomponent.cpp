@@ -2,6 +2,7 @@
 // todocomponent.cpp
 #include "todocomponent.h"
 #include "todo.h"
+#include "boardwindowapi.h"
 
 toDoComponent::toDoComponent(QWidget *parent) : QWidget(parent) {
 
@@ -86,6 +87,8 @@ toDoComponent::toDoComponent(toDo *td, QWidget *parent)
         lawyerOrSupervisorLabel->setText("Supervisor: " + getInitials(todo->getToDoAuthorName()));
     }
     setMaximumSize(300,200);
+    connect(checkbox, &QCheckBox::stateChanged, this, &toDoComponent::onCheckBoxStateChanged);
+
 
 }
 
@@ -131,5 +134,16 @@ QString toDoComponent::getInitials(const QString& fullName)  {
     } else {
         // Handle the case where there are not enough parts
         return fullName;
+    }
+}
+void toDoComponent::onCheckBoxStateChanged(int state)
+{
+    if (state == Qt::Checked) {
+        // Checkbox is checked
+        qDebug() << "Checkbox is checked!";
+        boardWindowApi::getInstance()->toDoDone((this->todo)->getId());
+    } else {
+        // Checkbox is unchecked
+        qDebug() << "Checkbox is unchecked!";
     }
 }

@@ -22,6 +22,7 @@ public:
     ~boardWindowApi();
     static boardWindowApi* getInstance();
     void postToDo(const QString &title, const QString &description, const QString &deadline, int juniorId);
+    void toDoDone(int id);
 
 
 

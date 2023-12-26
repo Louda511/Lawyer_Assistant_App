@@ -4,5 +4,6 @@
     </qresource>
     <qresource prefix="/stylesheet">
         <file>Adaptic.qss</file>
+        <file>Obit.qss</file>
     </qresource>
 </RCC>
