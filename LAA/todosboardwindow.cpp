@@ -53,7 +53,7 @@ toDosBoardWindow::toDosBoardWindow(QWidget *parent)
     // Your additional initialization code here
     qDebug() << "Layout Size: " << hLayout->sizeHint();
     //qDebug() << "Layout Size: " << mainGridLayout->sizeHint();
-    addToDoPushButton->setMaximumWidth(100);
+    addToDoPushButton->setMaximumWidth(150);
     addToDoPushButton->setMaximumHeight(30);
     title->setMaximumHeight(30);
 

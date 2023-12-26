@@ -77,6 +77,7 @@ toDoComponent::toDoComponent(toDo *td, QWidget *parent)
         lawyerOrSupervisorLabel->setText("Lawyer: "+ getInitials(todo->getToDoAuthorName()));
         //deleteButton = new QPushButton("Delete", this);
         mainLayout->addWidget(lawyerOrSupervisorLabel);
+        checkbox->setCheckable(false);
         //mainLayout->addWidget(deleteButton);
     }
     else if(userType != nullptr)

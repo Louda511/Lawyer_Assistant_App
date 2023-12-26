@@ -2,5 +2,7 @@
     <qresource prefix="/pics">
         <file>Logo.jpg</file>
     </qresource>
-    <qresource prefix="/new/prefix1"/>
+    <qresource prefix="/stylesheet">
+        <file>Adaptic.qss</file>
+    </qresource>
 </RCC>
