@@ -59,5 +59,5 @@ Thank you to all the contributors who have helped make Lawyer Assistant App bett
 
 ## Contact
 
-If you have any questions or feedback, please contact me at [abdoo738@yahoo.com].       
-or my LinkedIn [https://www.linkedin.com/in/abdelrahman-badawy-4517a6231/].
+If you have any questions or feedback, please contact me at [eng.ahmed.khaled.511@gmail.com].       
+or my LinkedIn [https://www.linkedin.com/in/ahmed---khaled/].
